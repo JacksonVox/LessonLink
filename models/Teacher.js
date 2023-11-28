@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt')
 
 const TeacherSchema = new mongoose.Schema({
     userType: { type: String, default: 'teacher' },
-    name: { type: String, unique: false },
+    userName: { type: String, unique: false },
     email: { type: String, unique: true},
     password: String,
 })
