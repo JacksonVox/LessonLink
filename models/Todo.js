@@ -9,7 +9,7 @@ const TodoSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  adminId: {
+  teacherId: {
     type: String,
     required: true,
   },
@@ -17,7 +17,7 @@ const TodoSchema = new mongoose.Schema({
     type: Boolean,
     required: true,
   },
-  completedByUserId: {
+  completedByTeacherId: {
     type: String,
     required: false,
   },

@@ -1,7 +1,7 @@
 const deleteBtn = document.querySelectorAll('.delete-button')
 const todoBtn = document.querySelectorAll('button.not')
 const todoComplete = document.querySelectorAll('button.completed')
-const assignUserDropdowns = document.querySelectorAll('.assign-user')
+const assignTeacherDropdowns = document.querySelectorAll('.assign-user')
 
 Array.from(deleteBtn).forEach((el)=>{
     el.addEventListener('click', deleteTodo)
@@ -15,7 +15,7 @@ Array.from(todoComplete).forEach((el)=>{
     el.addEventListener('click', markIncomplete)
 })
 
-Array.from(assignUserDropdowns).forEach(dropdown => {
+Array.from(assignTeacherDropdowns).forEach(dropdown => {
     dropdown.addEventListener('change', async (event) => {
       const userId = event.target.value;
       const todoId = event.target.closest('.todo-item').dataset.id;

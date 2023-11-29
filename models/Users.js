@@ -1,25 +1,25 @@
 const bcrypt = require('bcrypt')
 const mongoose = require('mongoose')
 
-const UserSchema = new mongoose.Schema({
+const TeacherSchema = new mongoose.Schema({
   userName: { type: String, unique: false },
   email: { type: String, unique: true },
   password: String,
-  adminId: { type: String, unique: false },
+  teacherId: { type: String, unique: false },
   isAdmin: Boolean
 })
 
-const SubUserSchema = new mongoose.Schema({
+const StudentSchema = new mongoose.Schema({
   userName: { type: String, unique: false },
   passKey: { type: String, unique: true },
-  adminId: { type: String, unique: false },
+  teacherId: { type: String, unique: false },
   isAdmin: Boolean
 })
 
 
 // Password hash middleware.
  
-UserSchema.pre('save', function save(next) {
+TeacherSchema.pre('save', function save(next) {
   const user = this
   if (!user.isModified('password')) { return next() }
   bcrypt.genSalt(10, (err, salt) => {
@@ -27,19 +27,19 @@ UserSchema.pre('save', function save(next) {
     bcrypt.hash(user.password, salt, (err, hash) => {
       if (err) { return next(err) }
       user.password = hash
-      if (!user.adminId) {
-        user.adminId = user._id; // Set adminId
+      if (!user.teacherId) {
+        user.teacherId = user._id; // Set teacherId
       }
       next()
     })
   })
 })
 
-//Set adminId on SubUser middleware.
-SubUserSchema.pre('save', function save(next) {
+//Set teacherId on Student middleware.
+StudentSchema.pre('save', function save(next) {
   const user = this
-      if (!user.adminId) {
-        user.adminId = user._id; // Set adminId
+      if (!user.teacherId) {
+        user.teacherId = user._id; // Set teacherId
       }
       next()
 })
@@ -47,7 +47,7 @@ SubUserSchema.pre('save', function save(next) {
 
 // Helper method for validating user's password.
 
-UserSchema.methods.comparePassword = function comparePassword(candidatePassword, cb) {
+TeacherSchema.methods.comparePassword = function comparePassword(candidatePassword, cb) {
   bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
     cb(err, isMatch)
   })
@@ -56,7 +56,7 @@ UserSchema.methods.comparePassword = function comparePassword(candidatePassword,
 
 
 
-const User = mongoose.model('User', UserSchema);
-const SubUser = mongoose.model('SubUser', SubUserSchema);
+const Teacher = mongoose.model('Teacher', TeacherSchema);
+const Student = mongoose.model('Student', StudentSchema);
 
-module.exports = { User, SubUser };
+module.exports = { Teacher, Student };

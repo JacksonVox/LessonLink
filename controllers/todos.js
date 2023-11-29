@@ -1,27 +1,27 @@
 const Todo = require('../models/Todo');
 const { v4: uuidv4 } = require('uuid');
-const { User } = require('../models/User');
-const { SubUser } = require('../models/User');
+const { Teacher } = require('../models/Users');
+const { Student } = require('../models/Users');
 
 module.exports = {
     getTodos: async (req,res)=>{
         console.log(req.user)
         const passKey =  uuidv4();
         try{
-            let todoItems = await Todo.find({adminId:req.user.adminId})
+            let todoItems = await Todo.find({teacherId:req.user.teacherId})
             todoItems = todoItems.sort((a, b) => a.completed - b.completed)
             const itemsLeft = await Todo.countDocuments({assignedToId:req.user.id,completed: false})
-            const teamUsers = await SubUser.find({adminId: req.user.adminId})
-            const adminUser = await User.findById(req.user.adminId)
-            const allUsers = [adminUser, ...teamUsers]
-            res.render('todos.ejs', {todos: todoItems, left: itemsLeft, user: req.user, adminId: req.user.adminId, teamUsers: allUsers, passKey: passKey})
+            const teamTeachers = await Student.find({teacherId: req.user.teacherId})
+            const adminTeacher = await Teacher.findById(req.user.teacherId)
+            const allTeachers = [adminTeacher, ...teamTeachers]
+            res.render('todos.ejs', {todos: todoItems, left: itemsLeft, user: req.user, teacherId: req.user.teacherId, teamTeachers: allTeachers, passKey: passKey})
         }catch(err){
             console.log(err)
         }
     },
     createTodo: async (req, res)=>{
         try{
-            await Todo.create({todo: req.body.todoItem, completed: false, userId: req.user.id, completedByUserId: req.user.id, adminId: req.user.adminId})
+            await Todo.create({todo: req.body.todoItem, completed: false, userId: req.user.id, completedByUserId: req.user.id, teacherId: req.user.teacherId})
             console.log('Todo has been added!')
             res.redirect('/todos')
         }catch(err){
@@ -60,9 +60,9 @@ module.exports = {
             console.log(err)
         }
     },
-    getUsersByAdminId: async (req, res)=>{
+    getTeachersByTeacherId: async (req, res)=>{
         try{
-            const userTeam = await SubUser.find({adminId: req.user.adminId})
+            const userTeam = await Student.find({teacherId: req.user.teacherId})
             res.json(userTeam)
         }catch(err){
             console.error(err)

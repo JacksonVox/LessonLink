@@ -1,10 +1,10 @@
 const LocalStrategy = require('passport-local').Strategy
 const mongoose = require('mongoose')
-const { User, SubUser } = require('../models/User')
+const { Teacher, Student } = require('../models/Users')
 
 module.exports = function (passport) {
   passport.use(new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
-    User.findOne({ email: email.toLowerCase() }, (err, user) => {
+    Teacher.findOne({ email: email.toLowerCase() }, (err, user) => {
       if (err) { return done(err) }
       if (!user) {
         return done(null, false, { msg: `Email ${email} not found.` })
@@ -24,14 +24,14 @@ module.exports = function (passport) {
   
 
   passport.serializeUser((user, done) => {
-    done(null, { id: user.id, type: user instanceof SubUser ? 'SubUser' : 'User' });
+    done(null, { id: user.id, type: user instanceof Student ? 'student' : 'teacher' });
   });
   
   passport.deserializeUser((data, done) => {
-    if (data.type === 'User') {
-      User.findById(data.id, (err, user) => done(err, user));
-    } else if (data.type === 'SubUser') {
-      SubUser.findById(data.id, (err, subUser) => done(err, subUser));
+    if (data.type === 'teacher') {
+      Teacher.findById(data.id, (err, user) => done(err, user));
+    } else if (data.type === 'student') {
+      Student.findById(data.id, (err, student) => done(err, student));
     }
   });
 }

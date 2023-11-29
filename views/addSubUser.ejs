@@ -20,8 +20,8 @@
         <p>Enter your name below to join <%= adminName %>&apos;s team.</p>
         
 
-        <form action="/addSubUser/<%= adminId %>/<%= passKey %>" method="POST">
-            <input class='text' type="text" name="userName" placeholder="User Name">
+        <form action="/addStudent/<%= teacherId %>/<%= passKey %>" method="POST">
+            <input class='text' type="text" name="userName" placeholder="Teacher Name">
             <input class='submit' type="submit">
         </form>
 

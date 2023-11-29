@@ -1,8 +1,8 @@
 const passport = require('passport')
 const validator = require('validator')
 const { v4: uuidv4 } = require('uuid')
-const { User } = require('../models/User')
-const { SubUser } = require('../models/User')
+const { Teacher } = require('../models/Users')
+const { Student } = require('../models/Users')
 
  exports.getLogin = (req, res) => {
     if (req.user) {
@@ -40,7 +40,7 @@ const { SubUser } = require('../models/User')
   
   exports.logout = (req, res) => {
     req.logout(() => {
-      console.log('User has logged out.')
+      console.log('Teacher has logged out.')
     })
     req.session.destroy((err) => {
       if (err) console.log('Error : Failed to destroy the session during logout.', err)
@@ -70,13 +70,13 @@ const { SubUser } = require('../models/User')
     }
     req.body.email = validator.normalizeEmail(req.body.email, { gmail_remove_dots: false })
   
-    const user = new User({
+    const user = new Teacher({
       userName: req.body.userName,
       email: req.body.email,
       password: req.body.password,
     })
   
-    User.findOne({$or: [
+    Teacher.findOne({$or: [
       {email: req.body.email},
       {userName: req.body.userName}
     ]}, (err, existingUser) => {
@@ -97,12 +97,12 @@ const { SubUser } = require('../models/User')
     })
   }
 
-  exports.getAddSubUser = (req, res, next) => {
+  exports.getAddStudent = (req, res, next) => {
     const userPassKey = req.params.passKey;
-    const adminId = req.params.adminId; // Define adminId here
+    const teacherId = req.params.teacherId; // Define teacherId here
     let adminName;
 
-    User.findOne({_id: adminId}, (err, user) => {
+    Teacher.findOne({_id: teacherId}, (err, user) => {
       if (err) {
         console.error(err);
       } else {
@@ -110,7 +110,7 @@ const { SubUser } = require('../models/User')
       }
     });
 
-    SubUser.findOne({passKey: userPassKey}, (err, existingUser) => {
+    Student.findOne({passKey: userPassKey}, (err, existingUser) => {
       if (err) { return next(err) }
 
       if (existingUser) {
@@ -119,8 +119,8 @@ const { SubUser } = require('../models/User')
           res.redirect('/todos')
         })
       } else {
-        res.render('addSubUser', {
-          adminId: adminId,
+        res.render('addStudent', {
+          teacherId: teacherId,
           passKey: userPassKey,
           adminName: adminName
         });
@@ -128,16 +128,16 @@ const { SubUser } = require('../models/User')
     });
   }
 
-  exports.postAddSubUser = (req, res)=>{
-    const subUser = new SubUser({
+  exports.postAddStudent = (req, res)=>{
+    const student = new Student({
       userName: req.body.userName,
-      adminId: req.params.adminId,
+      teacherId: req.params.teacherId,
       passKey: req.params.passKey
     })
 
-    subUser.save((err) => {
+    student.save((err) => {
       if (err) { return next(err) }
-      req.logIn(subUser, (err) => {
+      req.logIn(student, (err) => {
         if (err) {
           return next(err)
         }
