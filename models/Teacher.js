@@ -8,4 +8,8 @@ const TeacherSchema = new mongoose.Schema({
     password: String,
 })
 
+TeacherSchema.methods.comparePassword = function(candidatePassword) {
+    return bcrypt.compare(candidatePassword, this.password);
+};
+
 module.exports = mongoose.model('Teacher', TeacherSchema)

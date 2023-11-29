@@ -10,4 +10,8 @@ const StudentSchema = new mongoose.Schema({
     assignedDocs: { type: Array, default: [] }
 })
 
+StudentSchema.methods.comparePassword = function(candidatePassword) {
+    return bcrypt.compare(candidatePassword, this.password);
+};
+
 module.exports = mongoose.model('Student', StudentSchema)

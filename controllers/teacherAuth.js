@@ -2,13 +2,15 @@ const passport = require('passport')
 const validator = require('validator')
 const { v4: uuidv4 } = require('uuid')
 const Teacher = require('../models/Teacher')
-const Student = require('../models/Student')
 
  exports.getLogin = (req, res) => {
-    if (req.user) {
-      return res.redirect('/todos')
-    }
-    res.render('login', {
+  if (req.user.userType === 'student') {
+    return res.redirect('/student/home')
+  }
+  if (req.user.userType === 'teacher') {
+    return res.redirect('/teacher/students')
+  }
+    res.render('teacher-login', {
       title: 'Login'
     })
   }
@@ -20,7 +22,7 @@ const Student = require('../models/Student')
   
     if (validationErrors.length) {
       req.flash('errors', validationErrors)
-      return res.redirect('/login')
+      return res.redirect('/teacher/login')
     }
     req.body.email = validator.normalizeEmail(req.body.email, { gmail_remove_dots: false })
   
@@ -28,12 +30,12 @@ const Student = require('../models/Student')
       if (err) { return next(err) }
       if (!user) {
         req.flash('errors', info)
-        return res.redirect('/login')
+        return res.redirect('/teacher/login')
       }
       req.logIn(user, (err) => {
         if (err) { return next(err) }
         req.flash('success', { msg: 'Success! You are logged in.' })
-        res.redirect(req.session.returnTo || '/todos')
+        res.redirect(req.session.returnTo || '/teacher/students')
       })
     })(req, res, next)
   }
@@ -51,14 +53,14 @@ const Student = require('../models/Student')
   
   exports.getSignup = (req, res) => {
     if (req.user) {
-      return res.redirect('/todos')
+      return res.redirect('teacher/students')
     }
-    res.render('signup', {
+    res.render('teacher-signup', {
       title: 'Create Account'
     })
   }
   
-  exports.postSignup = (req, res, next) => {
+  exports.postSignup = async (req, res, next) => {
     const validationErrors = []
     if (!validator.isEmail(req.body.email)) validationErrors.push({ msg: 'Please enter a valid email address.' })
     if (!validator.isLength(req.body.password, { min: 8 })) validationErrors.push({ msg: 'Password must be at least 8 characters long' })
@@ -66,7 +68,7 @@ const Student = require('../models/Student')
   
     if (validationErrors.length) {
       req.flash('errors', validationErrors)
-      return res.redirect('../signup')
+      return res.redirect('../teacher/signup')
     }
     req.body.email = validator.normalizeEmail(req.body.email, { gmail_remove_dots: false })
   
@@ -76,23 +78,25 @@ const Student = require('../models/Student')
       password: req.body.password,
     })
   
-    Teacher.findOne({$or: [
-      {email: req.body.email},
-      {userName: req.body.userName}
-    ]}, (err, existingUser) => {
-      if (err) { return next(err) }
+    try {
+      const existingUser = await Teacher.findOne({$or: [
+        {email: req.body.email},
+        {userName: req.body.userName}
+      ]});
+  
       if (existingUser) {
         req.flash('errors', { msg: 'Account with that email address or username already exists.' })
-        return res.redirect('../signup')
+        return res.redirect('../teacher/signup')
       }
-      user.save((err) => {
-        if (err) { return next(err) }
-        req.logIn(user, (err) => {
-          if (err) {
-            return next(err)
-          }
-          res.redirect('/todos')
-        })
+  
+      await user.save();
+      req.logIn(user, (err) => {
+        if (err) {
+          return next(err)
+        }
+        res.redirect('/teacher/students')
       })
-    })
+    } catch (err) {
+      return next(err);
+    }
   }
