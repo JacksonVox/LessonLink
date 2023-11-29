@@ -5,7 +5,7 @@ const Student = require('../models/Student')
 
  exports.getLogin = (req, res) => {
     if (req.user.userType === 'student') {
-      return res.redirect('/student/home')
+      return res.redirect('/student/documents')
     }
     if (req.user.userType === 'teacher') {
       return res.redirect('/teacher/students')
@@ -35,7 +35,7 @@ const Student = require('../models/Student')
       req.logIn(user, (err) => {
         if (err) { return next(err) }
         req.flash('success', { msg: 'Success! You are logged in.' })
-        res.redirect(req.session.returnTo || '/student/home')
+        res.redirect(req.session.returnTo || '/student/documents')
       })
     })(req, res, next)
   }
@@ -53,7 +53,7 @@ const Student = require('../models/Student')
   
   exports.getSignup = (req, res) => {
     if (req.user) {
-      return res.redirect('/student/home')
+      return res.redirect('/student/documents')
     }
     res.render('student-signup', {
       title: 'Create Account'
@@ -94,7 +94,7 @@ const Student = require('../models/Student')
         if (err) {
           return next(err)
         }
-        res.redirect('/todos')
+        res.redirect('/documents')
       })
     } catch (err) {
       return next(err);

@@ -5,7 +5,7 @@ const Teacher = require('../models/Teacher')
 
  exports.getLogin = (req, res) => {
   if (req.user.userType === 'student') {
-    return res.redirect('/student/home')
+    return res.redirect('/student/documents')
   }
   if (req.user.userType === 'teacher') {
     return res.redirect('/teacher/students')
