@@ -6,28 +6,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/reset.css">
     <link rel="stylesheet" href="/css/style.css">
-    <title>LessonLink</title>
+    <title>Document</title>
 </head>
 <body>
     <header>
-        <h1>LessonLink</h1>
+        <h1>QuickTeam</h1>
     </header>
-
     <main>
+        
     <% if (locals.messages.errors) { %>
         <% messages.errors.forEach( el => { %>
             <div class="alert alert-danger"><%= el.msg %></div>
         <% }) %>    
     <% } %>
-
-    <form class="form-full" action="/teacher/signup" method="POST">
-        <input type="text" name="userName" placeholder="User Name">
+    <% if (locals.messages.info) { %>
+        <% messages.info.forEach( el => { %>
+            <div class="alert alert-danger"><%= el.msg %></div>
+        <% }) %>    
+    <% } %>
+    <form class="form-full" action="/login" method="POST">
         <input type="email" name="email" placeholder="Email">
         <input type="password" name="password" placeholder="Password">
-        <input type="password" name="confirmPassword" placeholder="Confirm Password">
         <input class="btn-1" type="submit">
     </form>
-    </main>
 
+    <div class="flex-col">
+        <span>Don't have an account?</span>
+        <a class="btn-2" href="/signup">Sign Up</a>
+    </div>
+
+    </main>
 </body>
 </html>

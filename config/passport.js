@@ -1,48 +1,37 @@
 const LocalStrategy = require('passport-local').Strategy
 const mongoose = require('mongoose')
-const Teacher = require('../models/Teacher')
-const Student = require('../models/Student')
+const { User, SubUser } = require('../models/User')
 
 module.exports = function (passport) {
-  passport.use(new LocalStrategy({ usernameField: 'email' }, async (email, password, done) => {
-    try {
-      const user = await Teacher.findOne({ email: email.toLowerCase() });
-
+  passport.use(new LocalStrategy({ usernameField: 'email' }, (email, password, done) => {
+    User.findOne({ email: email.toLowerCase() }, (err, user) => {
+      if (err) { return done(err) }
       if (!user) {
-        return done(null, false, { msg: `Email ${email} not found.` });
+        return done(null, false, { msg: `Email ${email} not found.` })
       }
-
       if (!user.password) {
-        return done(null, false, { msg: 'Your account was registered using a sign-in provider. To enable password login, sign in using a provider, and then set a password under your user profile.' });
+        return done(null, false, { msg: 'Your account was registered using a sign-in provider. To enable password login, sign in using a provider, and then set a password under your user profile.' })
       }
-
-      const isMatch = await user.comparePassword(password);
-
-      if (isMatch) {
-        return done(null, user);
-      } else {
-        return done(null, false, { msg: 'Invalid email or password.' });
-      }
-    } catch (err) {
-      return done(err);
-    }
-  }));
+      user.comparePassword(password, (err, isMatch) => {
+        if (err) { return done(err) }
+        if (isMatch) {
+          return done(null, user)
+        }
+        return done(null, false, { msg: 'Invalid email or password.' })
+      })
+    })
+  }))
+  
 
   passport.serializeUser((user, done) => {
-    done(null, { id: user.id, type: user instanceof Student ? 'Student' : 'Teacher' });
+    done(null, { id: user.id, type: user instanceof SubUser ? 'SubUser' : 'User' });
   });
-
-  passport.deserializeUser(async (data, done) => {
-    try {
-      if (data.type === 'Teacher') {
-        const user = await Teacher.findById(data.id);
-        done(null, user);
-      } else if (data.type === 'Student') {
-        const student = await Student.findById(data.id);
-        done(null, student);
-      }
-    } catch (err) {
-      done(err);
+  
+  passport.deserializeUser((data, done) => {
+    if (data.type === 'User') {
+      User.findById(data.id, (err, user) => done(err, user));
+    } else if (data.type === 'SubUser') {
+      SubUser.findById(data.id, (err, subUser) => done(err, subUser));
     }
   });
 }

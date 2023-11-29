@@ -1,16 +1,14 @@
 const passport = require('passport')
 const validator = require('validator')
 const { v4: uuidv4 } = require('uuid')
-const Student = require('../models/Student')
+const { User } = require('../models/User')
+const { SubUser } = require('../models/User')
 
  exports.getLogin = (req, res) => {
-    if (req.user.userType === 'student') {
-      return res.redirect('/student/documents')
+    if (req.user) {
+      return res.redirect('/todos')
     }
-    if (req.user.userType === 'teacher') {
-      return res.redirect('/teacher/students')
-    }
-    res.render('student-login', {
+    res.render('login', {
       title: 'Login'
     })
   }
@@ -22,7 +20,7 @@ const Student = require('../models/Student')
   
     if (validationErrors.length) {
       req.flash('errors', validationErrors)
-      return res.redirect('/student/login')
+      return res.redirect('/login')
     }
     req.body.email = validator.normalizeEmail(req.body.email, { gmail_remove_dots: false })
   
@@ -30,12 +28,12 @@ const Student = require('../models/Student')
       if (err) { return next(err) }
       if (!user) {
         req.flash('errors', info)
-        return res.redirect('/student/login')
+        return res.redirect('/login')
       }
       req.logIn(user, (err) => {
         if (err) { return next(err) }
         req.flash('success', { msg: 'Success! You are logged in.' })
-        res.redirect(req.session.returnTo || '/student/documents')
+        res.redirect(req.session.returnTo || '/todos')
       })
     })(req, res, next)
   }
@@ -53,14 +51,14 @@ const Student = require('../models/Student')
   
   exports.getSignup = (req, res) => {
     if (req.user) {
-      return res.redirect('/student/documents')
+      return res.redirect('/todos')
     }
-    res.render('student-signup', {
+    res.render('signup', {
       title: 'Create Account'
     })
   }
   
-  exports.postSignup = async (req, res, next) => {
+  exports.postSignup = (req, res, next) => {
     const validationErrors = []
     if (!validator.isEmail(req.body.email)) validationErrors.push({ msg: 'Please enter a valid email address.' })
     if (!validator.isLength(req.body.password, { min: 8 })) validationErrors.push({ msg: 'Password must be at least 8 characters long' })
@@ -68,35 +66,82 @@ const Student = require('../models/Student')
   
     if (validationErrors.length) {
       req.flash('errors', validationErrors)
-      return res.redirect('../student/signup')
+      return res.redirect('../signup')
     }
     req.body.email = validator.normalizeEmail(req.body.email, { gmail_remove_dots: false })
   
-    const user = new Student({
+    const user = new User({
       userName: req.body.userName,
       email: req.body.email,
       password: req.body.password,
     })
   
-    try {
-      const existingUser = await Student.findOne({$or: [
-        {email: req.body.email},
-        {userName: req.body.userName}
-      ]});
-  
+    User.findOne({$or: [
+      {email: req.body.email},
+      {userName: req.body.userName}
+    ]}, (err, existingUser) => {
+      if (err) { return next(err) }
       if (existingUser) {
         req.flash('errors', { msg: 'Account with that email address or username already exists.' })
         return res.redirect('../signup')
       }
-  
-      await user.save();
-      req.logIn(user, (err) => {
+      user.save((err) => {
+        if (err) { return next(err) }
+        req.logIn(user, (err) => {
+          if (err) {
+            return next(err)
+          }
+          res.redirect('/todos')
+        })
+      })
+    })
+  }
+
+  exports.getAddSubUser = (req, res, next) => {
+    const userPassKey = req.params.passKey;
+    const adminId = req.params.adminId; // Define adminId here
+    let adminName;
+
+    User.findOne({_id: adminId}, (err, user) => {
+      if (err) {
+        console.error(err);
+      } else {
+        adminName = user.userName;
+      }
+    });
+
+    SubUser.findOne({passKey: userPassKey}, (err, existingUser) => {
+      if (err) { return next(err) }
+
+      if (existingUser) {
+        req.logIn(existingUser, (err) => {
+          if (err) { return next(err) }
+          res.redirect('/todos')
+        })
+      } else {
+        res.render('addSubUser', {
+          adminId: adminId,
+          passKey: userPassKey,
+          adminName: adminName
+        });
+      }
+    });
+  }
+
+  exports.postAddSubUser = (req, res)=>{
+    const subUser = new SubUser({
+      userName: req.body.userName,
+      adminId: req.params.adminId,
+      passKey: req.params.passKey
+    })
+
+    subUser.save((err) => {
+      if (err) { return next(err) }
+      req.logIn(subUser, (err) => {
         if (err) {
           return next(err)
         }
-        res.redirect('/documents')
+        res.redirect('/todos')
       })
-    } catch (err) {
-      return next(err);
-    }
+    })
   }

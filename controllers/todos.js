@@ -1,36 +1,36 @@
-const Document = require('../models/Document');
+const Todo = require('../models/Todo');
 const { v4: uuidv4 } = require('uuid');
-const Teacher = require('../models/Teacher');
-const Student = require('../models/Student');
+const { User } = require('../models/User');
+const { SubUser } = require('../models/User');
 
 module.exports = {
-    getDocs: async (req,res)=>{
+    getTodos: async (req,res)=>{
         console.log(req.user)
         const passKey =  uuidv4();
         try{
-            let documentItems = await Document.find({adminId:req.user.adminId})
-            documentItems = documentItems.sort((a, b) => a.completed - b.completed)
-            const itemsLeft = await Document.countDocuments({assignedToId:req.user.id,completed: false})
+            let todoItems = await Todo.find({adminId:req.user.adminId})
+            todoItems = todoItems.sort((a, b) => a.completed - b.completed)
+            const itemsLeft = await Todo.countDocuments({assignedToId:req.user.id,completed: false})
             const teamUsers = await SubUser.find({adminId: req.user.adminId})
             const adminUser = await User.findById(req.user.adminId)
             const allUsers = [adminUser, ...teamUsers]
-            res.render('teacher-documents.ejs', {documents: documentItems, left: itemsLeft, user: req.user, adminId: req.user.adminId, teamUsers: allUsers, passKey: passKey})
+            res.render('todos.ejs', {todos: todoItems, left: itemsLeft, user: req.user, adminId: req.user.adminId, teamUsers: allUsers, passKey: passKey})
         }catch(err){
             console.log(err)
         }
     },
-    createDocument: async (req, res)=>{
+    createTodo: async (req, res)=>{
         try{
-            await Document.create({document: req.body.documentItem, completed: false, userId: req.user.id, completedByUserId: req.user.id, adminId: req.user.adminId})
-            console.log('Document has been added!')
-            res.redirect('/documents')
+            await Todo.create({todo: req.body.todoItem, completed: false, userId: req.user.id, completedByUserId: req.user.id, adminId: req.user.adminId})
+            console.log('Todo has been added!')
+            res.redirect('/todos')
         }catch(err){
             console.log(err)
         }
     },
     markComplete: async (req, res)=>{
         try{
-            await Document.findOneAndUpdate({_id:req.body.documentIdFromJSFile},{
+            await Todo.findOneAndUpdate({_id:req.body.todoIdFromJSFile},{
                 completed: true
             })
             console.log('Marked Complete')
@@ -41,7 +41,7 @@ module.exports = {
     },
     markIncomplete: async (req, res)=>{
         try{
-            await Document.findOneAndUpdate({_id:req.body.documentIdFromJSFile},{
+            await Todo.findOneAndUpdate({_id:req.body.todoIdFromJSFile},{
                 completed: false
             })
             console.log('Marked Incomplete')
@@ -50,11 +50,11 @@ module.exports = {
             console.log(err)
         }
     },
-    deleteDocument: async (req, res)=>{
-        console.log(req.body.documentIdFromJSFile)
+    deleteTodo: async (req, res)=>{
+        console.log(req.body.todoIdFromJSFile)
         try{
-            await Document.findOneAndDelete({_id:req.body.documentIdFromJSFile})
-            console.log('Deleted Document')
+            await Todo.findOneAndDelete({_id:req.body.todoIdFromJSFile})
+            console.log('Deleted Todo')
             res.json('Deleted It')
         }catch(err){
             console.log(err)
@@ -69,9 +69,9 @@ module.exports = {
             res.status(500).send('Server Error')
         }
     },
-    assignDocument: async (req, res)=>{
+    assignTodo: async (req, res)=>{
         try{
-            await Document.findByIdAndUpdate(req.params.documentId, {assignedToId: req.params.userId})
+            await Todo.findByIdAndUpdate(req.params.todoId, {assignedToId: req.params.userId})
             res.json({status: 'OK'})
         }catch(err){
             console.error(err)
