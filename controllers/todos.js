@@ -19,7 +19,7 @@ module.exports = {
             console.log(err)
         }
     },
-    createTodo: async (req, res)=>{
+    createDocument: async (req, res)=>{
         try{
             await Todo.create({todo: req.body.todoItem, completed: false, userId: req.user.id, completedByUserId: req.user.id, teacherId: req.user.teacherId})
             console.log('Todo has been added!')
@@ -30,7 +30,7 @@ module.exports = {
     },
     markComplete: async (req, res)=>{
         try{
-            await Todo.findOneAndUpdate({_id:req.body.todoIdFromJSFile},{
+            await Todo.findOneAndUpdate({_id:req.body.documentIdFromJSFile},{
                 completed: true
             })
             console.log('Marked Complete')
@@ -41,7 +41,7 @@ module.exports = {
     },
     markIncomplete: async (req, res)=>{
         try{
-            await Todo.findOneAndUpdate({_id:req.body.todoIdFromJSFile},{
+            await Todo.findOneAndUpdate({_id:req.body.documentIdFromJSFile},{
                 completed: false
             })
             console.log('Marked Incomplete')
@@ -50,10 +50,10 @@ module.exports = {
             console.log(err)
         }
     },
-    deleteTodo: async (req, res)=>{
-        console.log(req.body.todoIdFromJSFile)
+    deleteDocument: async (req, res)=>{
+        console.log(req.body.documentIdFromJSFile)
         try{
-            await Todo.findOneAndDelete({_id:req.body.todoIdFromJSFile})
+            await Todo.findOneAndDelete({_id:req.body.documentIdFromJSFile})
             console.log('Deleted Todo')
             res.json('Deleted It')
         }catch(err){
@@ -69,9 +69,9 @@ module.exports = {
             res.status(500).send('Server Error')
         }
     },
-    assignTodo: async (req, res)=>{
+    assignDocument: async (req, res)=>{
         try{
-            await Todo.findByIdAndUpdate(req.params.todoId, {assignedToId: req.params.userId})
+            await Todo.findByIdAndUpdate(req.params.documentId, {assignedToId: req.params.userId})
             res.json({status: 'OK'})
         }catch(err){
             console.error(err)

@@ -65,11 +65,11 @@ ul {
     border-radius: 5px;
 }
 
-.todo-item {
+.document {
     height: 3rem;
     width: 100%;
     display: grid;
-    grid-template-areas: "button todo assignment delete";
+    grid-template-areas: "document-title assignment button delete";
     grid-template-rows: 1fr;
     grid-template-columns: auto 1fr auto auto;
     align-items: center;
@@ -78,12 +78,12 @@ ul {
     background-color: #FCEDC5;
 }
 
-.todo-item:nth-child(2n) {
+.document:nth-child(2n) {
     background-color: #FBE7B1;
 }
 
 /* Button */
-.todo-button {
+.complete-button {
     grid-area: button;
     width: 1.8rem;
     height: 1.8rem;
@@ -94,12 +94,12 @@ ul {
     cursor: pointer;
 }
 
-.todo-button.completed{
+.complete-button.completed{
     background-color: #8F857D;
 }
 
 /* TODO Name */
-.todo {
+.document-title {
     grid-area: todo;
     font-size: 1.8rem;
     overflow: hidden;
@@ -158,7 +158,7 @@ ul {
 }
 
 /* Add Note */
-.create-todo {
+.create-document {
     display: flex;
     align-items: center;
     padding: 3px;
@@ -166,7 +166,7 @@ ul {
     height: 40px;
 }
 
-    .create-todo * {
+    .create-document * {
         height: 95%;
         margin: 5px;
     }
@@ -180,14 +180,14 @@ ul {
 
     }
 
-    .create-todo .submit {
+    .create-document .submit {
         width: 60px;
         border: 2px solid #786F68;
         border-radius: 5px;
         background-color: #F6D579;
     }
 
-    .create-todo .submit:hover {
+    .create-document .submit:hover {
         background-color: #F6B579;
         border-color: #786F78;
         cursor: pointer;

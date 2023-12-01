@@ -4,7 +4,7 @@ const todoComplete = document.querySelectorAll('button.completed')
 const assignTeacherDropdowns = document.querySelectorAll('.assign-user')
 
 Array.from(deleteBtn).forEach((el)=>{
-    el.addEventListener('click', deleteTodo)
+    el.addEventListener('click', deleteDocument)
 })
 
 Array.from(todoBtn).forEach((el)=>{
@@ -18,10 +18,10 @@ Array.from(todoComplete).forEach((el)=>{
 Array.from(assignTeacherDropdowns).forEach(dropdown => {
     dropdown.addEventListener('change', async (event) => {
       const userId = event.target.value;
-      const todoId = event.target.closest('.todo-item').dataset.id;
+      const documentId = event.target.closest('.document').dataset.id;
   
       try {
-        const response = await fetch(`/todos/assignTodo/${todoId}/${userId}`, {
+        const response = await fetch(`/todos/assignDocument/${documentId}/${userId}`, {
           method: 'PUT',
           headers: {'Content-type': 'application/json'}
         });
@@ -39,14 +39,14 @@ Array.from(assignTeacherDropdowns).forEach(dropdown => {
     });
   });
 
-async function deleteTodo(){
-    const todoId = this.parentNode.dataset.id
+async function deleteDocument(){
+    const documentId = this.parentNode.dataset.id
     try{
-        const response = await fetch('todos/deleteTodo', {
+        const response = await fetch('todos/deleteDocument', {
             method: 'delete',
             headers: {'Content-type': 'application/json'},
             body: JSON.stringify({
-                'todoIdFromJSFile': todoId
+                'documentIdFromJSFile': documentId
             })
         })
         const data = await response.json()
@@ -58,13 +58,13 @@ async function deleteTodo(){
 }
 
 async function markComplete(){
-    const todoId = this.parentNode.dataset.id
+    const documentId = this.parentNode.dataset.id
     try{
         const response = await fetch('todos/markComplete', {
             method: 'put',
             headers: {'Content-type': 'application/json'},
             body: JSON.stringify({
-                'todoIdFromJSFile': todoId
+                'documentIdFromJSFile': documentId
             })
         })
         const data = await response.json()
@@ -76,13 +76,13 @@ async function markComplete(){
 }
 
 async function markIncomplete(){
-    const todoId = this.parentNode.dataset.id
+    const documentId = this.parentNode.dataset.id
     try{
         const response = await fetch('todos/markIncomplete', {
             method: 'put',
             headers: {'Content-type': 'application/json'},
             body: JSON.stringify({
-                'todoIdFromJSFile': todoId
+                'documentIdFromJSFile': documentId
             })
         })
         const data = await response.json()
