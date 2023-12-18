@@ -60,17 +60,20 @@ main {
 }
 
 /* DOCUMENT Item */
-ul {
+.document-grid {
     width: 100%;
     border-radius: 5px;
 }
 
 .document {
-    height: 3rem;
-    width: 100%;
+    height: 9rem;
+    width: 9rem;
     display: grid;
-    grid-template-areas: "document-title assignment button delete";
-    grid-template-rows: 1fr;
+    grid-template-areas: 
+        "thumbnail"
+        "document-title"
+        "assignment button delete";
+    grid-template-rows: 1fr 1fr;
     grid-template-columns: auto 1fr auto auto;
     align-items: center;
     align-content: center;
@@ -100,7 +103,7 @@ ul {
 
 /* DOCUMENT Name */
 .document-title {
-    grid-area: document;
+    grid-area: document-title;
     font-size: 1.8rem;
     overflow: hidden;
     text-overflow: ellipsis;

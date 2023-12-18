@@ -18,11 +18,11 @@
     </header>
 
     <main>
-        <ul>
+        <ul class="document-grid">
             <% documents.forEach( el => { %>
             
                 <li class='document' data-id='<%=el._id%>'>
-                    <span class='document-title <%= el.completed === true ? 'completed' : 'not'%>'><%= el["document-title"]%></span>
+                    <span class='document-title <%= el.completed === true ? 'completed' : 'not'%>'><%= el["document"]%></span>
                     <span class='document-assignment'>
                         <i class="fas fa-user"></i>
                         <select class='assign-user'>
