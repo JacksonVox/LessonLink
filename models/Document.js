@@ -13,6 +13,10 @@ const DocumentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  dateCreated: {
+    type: Date,
+    required: true,
+  },
   completed: {
     type: Boolean,
     required: true,

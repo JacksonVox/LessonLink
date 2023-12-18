@@ -40,8 +40,8 @@ header h1 {
     font-family: "Roboto", sans-serif;
     font-weight: 500;
     font-style: italic;
-    color: #EFB61A;
-    text-decoration: underline overline #333533;
+    color: #64B6AC;
+    text-decoration: underline overline #5D737E;
 }
 
 /******* MAIN *******/
@@ -91,7 +91,7 @@ form {
 
     form input {
         width: 100%;
-        border: 2px solid #786F68;
+        border: 2px solid #5D737E;
         border-radius: 5px;
     }
 
@@ -103,15 +103,15 @@ form {
 
     form .submit {
         width: 60px;
-        border: 2px solid #786F68;
+        border: 2px solid #5D737E;
         border-radius: 5px;
-        background-color: #F6D579;
+        background-color: #D0E8F2;
         font-size: 1.4rem;
     }
 
     form .submit:hover {
-        background-color: #F6B579;
-        border-color: #786F78;
+        background-color: #64B6AC;
+        border-color: #5D737E;
         cursor: pointer;
     }
 
@@ -131,11 +131,11 @@ footer {
     z-index: 1;
 }
 .logout {
-    color: #F3C853;
+    color: #64B6AC;
     font-size: 1rem;
 }
 .logout:hover {
-    color: #EFB61A;
+    color: #5D737E;
 }
 
 
@@ -154,16 +154,16 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid #242423;
+    border: 2px solid #333333;
     border-radius: 5px;
-    background-color: #F6D579;
-    color: #242423;
+    background-color: #D0E8F2;
+    color: #333333;
     font-size: 1.8rem;
     padding: 3px;
     text-decoration: none;
 }
 .btn-1:hover {
-    color: #EFB61A;
+    color: #5D737E;
 }
 
 .btn-2 {
@@ -173,13 +173,13 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid #242423;
+    border: 2px solid #333333;
     border-radius: 5px;
-    background-color: #F6D579;
+    background-color: #D0E8F2;
     font-size: 1.8rem;
     padding: 3px;
-    color:#F6F5F4;
-    background-color: #333533;
+    color:#F4F4F4;
+    background-color: #5D737E;
     text-decoration: none;
     padding: 3px;
     text-decoration: none;

@@ -17,6 +17,13 @@
         <h1>LessonLink</h1>
     </header>
 
+    <nav>
+        <ul>
+            <li><a href="/documents">Documents</a></li>
+            <li><a href="/students">Students</a></li>
+        </ul>
+    </nav>
+
     <main>
         <ul class="document-grid">
             <% documents.forEach( el => { %>
@@ -24,15 +31,17 @@
                 <li class='document' data-id='<%=el._id%>'>
                     <span class='document-title <%= el.completed === true ? 'completed' : 'not'%>'><%= el["document"]%></span>
                     <span class='document-assignment'>
-                        <i class="fas fa-user"></i>
-                        <select class='assign-user'>
-                            <% teamTeachers.forEach(user => { %>
-                                <% console.log(user._id) %>
-                                <option value='<%= user._id %>' <%= user._id.toString() === el.assignedToId ? 'selected' : '' %>><%= user.userName %></option>
-                                <% }) %>
-                            </select>
-                        </span>
-                    <button class='complete-button <%= el.completed === true ? 'completed' : 'not'%>'></button>
+                        <i class="fas fa-clock"> 
+                            <% 
+                                let date_ob = new Date(el.dateCreated);
+                                let date = ("0" + date_ob.getDate()).slice(-2);
+                                let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+                                let year = date_ob.getFullYear();
+                                let formattedDate = month + "-" + date + "-" + year;
+                            %>
+                            <%= formattedDate %>
+                        </i>
+                    </span>
                     <span class='delete-button fas fa-trash-alt'></span>
                 </li>
             <% }) %>    
@@ -44,13 +53,9 @@
             <input class="document-input" type="text" placeholder="Enter Document Item" name='documentItem'>
             <input class="submit" type="submit">
         </form>
-        
-        <h2 class="tasks-left">Hello <span style="font-weight: bold;"><%= user.userName %></span>! You have <%= left %> things left to do.</h2>
     </div>
 
     <footer>
-        <!-- change this to share link -->
-        <a href="/addStudent/<%= user.teacherId %>/<%= passKey %>">Add Student</a>
         <a class="logout" href="/logout">Logout</a>
     </footer>
 

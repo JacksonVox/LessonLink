@@ -11,15 +11,16 @@ body {
     display: grid;
     grid-template-areas: 
       "header header header"
+      "nav nav nav"
       "main main main"
       "footer footer footer";
-    grid-template-rows: auto 1fr auto;
+    grid-template-rows: auto auto 1fr auto;
     height: 100vh;
     max-width: 400px;
     margin: auto;
     font-size: 2rem;
-    color: #242423;
-    background-color: #F6F5F4;
+    color: #333333;
+    background-color: #F4F4F4;
 }
 
 body * {
@@ -39,10 +40,37 @@ header h1 {
     font-family: "Roboto", sans-serif;
     font-weight: 500;
     font-style: italic;
-    color: #EFB61A;
-    text-decoration: underline overline #333533;
+    color: #64B6AC;
 }
-  
+
+/******* NAV *******/
+
+nav {
+    grid-area: nav;
+    align-self: center;
+    justify-self: center;
+    width: 100%;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-evenly;
+    background-color: #F4F4F4; /* Background color */
+    padding: 10px 0;
+    margin: 20px 0;
+}
+
+nav a {
+    color: #5D737E; /* Primary color */
+    text-decoration: none;
+    font-size: 2.5rem; /* Increased font size */
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    margin: 0 20px;
+    transition: color 0.3s ease;
+}
+
+nav a:hover {
+    color: #64B6AC; /* Secondary color */
+}
 
 /******* MAIN *******/
 main {
@@ -66,23 +94,20 @@ main {
 }
 
 .document {
-    height: 9rem;
-    width: 9rem;
+    height: 3rem;
+    width: 100%;
     display: grid;
-    grid-template-areas: 
-        "thumbnail"
-        "document-title"
-        "assignment button delete";
-    grid-template-rows: 1fr 1fr;
-    grid-template-columns: auto 1fr auto auto;
+    grid-template-areas: "title assignment button delete";
+    grid-template-rows: auto 1fr auto;
+    grid-template-columns: auto 1fr auto;
     align-items: center;
     align-content: center;
     padding: 3px;
-    background-color: #FCEDC5;
+    background-color: #D0E8F2;
 }
 
 .document:nth-child(2n) {
-    background-color: #FBE7B1;
+    background-color: #b7c7c5;
 }
 
 /* Button */
@@ -91,19 +116,19 @@ main {
     width: 1.8rem;
     height: 1.8rem;
     border-radius: 50%;
-    border: 2px solid #786F68;
-    background-color: #F6F5F4;
+    border: 2px solid #5D737E;
+    background-color: #F4F4F4;
     margin-right: 8px;
     cursor: pointer;
 }
 
 .complete-button.completed{
-    background-color: #8F857D;
+    background-color: #5D737E;
 }
 
 /* DOCUMENT Name */
 .document-title {
-    grid-area: document-title;
+    grid-area: title;
     font-size: 1.8rem;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -114,11 +139,11 @@ main {
     font-size: 1.2rem;
     justify-self: end;
     margin-right: 12px;
-    color: #8F857D;
+    color: #5D737E;
 }
 .completed{
-    color: #8F857D;
-    text-decoration: line-through #8F857D;
+    color: #5D737E;
+    text-decoration: line-through #5D737E;
 }
 
 /* DOCUMENT Assignment */
@@ -127,7 +152,7 @@ main {
     width: fit-content;
     font-family: "Roboto", sans-serif;
     font-size: 1.2rem;
-    color: #8F857D;
+    color: #5D737E;
     border: none;
     border-radius: 5px;
     background-color: inherit;
@@ -136,7 +161,7 @@ main {
 }
 .assign-user:focus {
     outline: none;
-    border-color: #F6B579;
+    border-color: #5D737E;
 }
 
 /* Delete Button */
@@ -145,7 +170,7 @@ main {
     justify-self: end;
     margin-right: 5px;
     font-size: 1rem;
-    color: #786F68;
+    color: #5D737E;
     cursor: pointer;
 }
 
@@ -154,7 +179,7 @@ main {
     grid-area: footer;
     position: sticky;
     bottom: 0;
-    background-color: #F6F5F4;
+    background-color: #F4F4F4;
     display: flex;
     flex-flow: column nowrap;
     align-items: center;
@@ -165,7 +190,7 @@ main {
     display: flex;
     align-items: center;
     padding: 3px;
-    margin: 20px 10px 10px 10px;
+    margin: 20px 10px 40px 10px;
     height: 40px;
 }
 
@@ -178,30 +203,25 @@ main {
         width: 100%;
         padding-left: 5px;
         font-size: 1.2rem;
-        border: 2px solid #786F68;
+        border: 2px solid #5D737E;
         border-radius: 5px;
 
     }
 
     .create-document .submit {
         width: 60px;
-        border: 2px solid #786F68;
+        border: 2px solid #5D737E;
         border-radius: 5px;
-        background-color: #F6D579;
+        background-color: #D0E8F2;
     }
 
     .create-document .submit:hover {
-        background-color: #F6B579;
+        background-color: #5D737E;
         border-color: #786F78;
         cursor: pointer;
     }
 
 
-/* Tasks Left */
-.tasks-left {
-    font-size: 1.1rem;
-    margin-bottom: 40px;
-}
 
 /******* FOOTER *******/
 footer {
@@ -221,16 +241,16 @@ footer {
 }
     footer a {
         height: 100%;
-        border: 2px solid #242423;
+        border: 2px solid #333333;
         border-radius: 5px;
         font-size: 1.6rem;
         padding: 3px;
-        color:#F6F5F4;
-        background-color: #333533;
+        color:#F4F4F4;
+        background-color: #5D737E;
         text-decoration: none;
     }
     footer a:hover {
-        background-color: #F6B579;
+        background-color: #5D737E;
         border-color: #786F78;
         cursor: pointer;
     }
