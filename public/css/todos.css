@@ -59,7 +59,7 @@ main {
     font-weight: 300;
 }
 
-/* TODO Item */
+/* DOCUMENT Item */
 ul {
     width: 100%;
     border-radius: 5px;
@@ -98,15 +98,15 @@ ul {
     background-color: #8F857D;
 }
 
-/* TODO Name */
+/* DOCUMENT Name */
 .document-title {
-    grid-area: todo;
+    grid-area: document;
     font-size: 1.8rem;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
 }
-.todo-assignment {
+.document-assignment {
     grid-area: assignment;
     font-size: 1.2rem;
     justify-self: end;
@@ -118,7 +118,7 @@ ul {
     text-decoration: line-through #8F857D;
 }
 
-/* TODO Assignment */
+/* DOCUMENT Assignment */
 .assign-user {
     grid-area: assignment;
     width: fit-content;
@@ -171,7 +171,7 @@ ul {
         margin: 5px;
     }
 
-    .todo-input {
+    .document-input {
         width: 100%;
         padding-left: 5px;
         font-size: 1.2rem;

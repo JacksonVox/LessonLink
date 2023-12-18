@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LessonLink</title>
     <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/todos.css">
+    <link rel="stylesheet" href="css/documents.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,11 +19,11 @@
 
     <main>
         <ul>
-            <% todos.forEach( el => { %>
+            <% documents.forEach( el => { %>
             
                 <li class='document' data-id='<%=el._id%>'>
                     <span class='document-title <%= el.completed === true ? 'completed' : 'not'%>'><%= el["document-title"]%></span>
-                    <span class='todo-assignment'>
+                    <span class='document-assignment'>
                         <i class="fas fa-user"></i>
                         <select class='assign-user'>
                             <% teamTeachers.forEach(user => { %>
@@ -40,8 +40,8 @@
     </main>
 
     <div class="input-footer">
-        <form class="create-todo" action="/todos/createDocument" method='POST'>
-            <input class="todo-input" type="text" placeholder="Enter Todo Item" name='todoItem'>
+        <form class="create-document" action="/documents/createDocument" method='POST'>
+            <input class="document-input" type="text" placeholder="Enter Document Item" name='documentItem'>
             <input class="submit" type="submit">
         </form>
         

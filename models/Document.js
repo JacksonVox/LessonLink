@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const DocumentSchema = new mongoose.Schema({
-  todo: {
+  document: {
     type: String,
     required: true,
   },
@@ -31,4 +31,4 @@ const DocumentSchema = new mongoose.Schema({
   }
 })
 
-module.exports = mongoose.model('Todo', DocumentSchema)
+module.exports = mongoose.model('Document', DocumentSchema)
