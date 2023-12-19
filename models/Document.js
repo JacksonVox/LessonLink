@@ -1,9 +1,13 @@
 const mongoose = require('mongoose')
 
 const DocumentSchema = new mongoose.Schema({
-  document: {
+  docTitle: {
     type: String,
     required: true,
+  },
+  docDescription: {
+    type: String,
+    required: false,
   },
   userId: {
     type: String,

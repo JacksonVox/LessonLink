@@ -29,7 +29,7 @@
             <% documents.forEach( el => { %>
             
                 <li class='document' data-id='<%=el._id%>'>
-                    <span class='document-title <%= el.completed === true ? 'completed' : 'not'%>'><%= el["document"]%></span>
+                    <span class='document-title <%= el.completed === true ? 'completed' : 'not'%>'><%= el["docTitle"]%></span>
                     <span class='document-assignment'>
                         <i class="fas fa-clock"> 
                             <% 
@@ -46,20 +46,32 @@
                 </li>
             <% }) %>    
         </ul>
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+              <span class="close">&times;</span>
+              <form action="/documents/createDocument" method='POST'>
+                <label for="docTitle">Title:</label><br>
+                <input type="text" id="docTitle" name="docTitle"><br>
+                <label for="docDescription">Description:</label><br>
+                <textarea id="docDescription" name="docDescription"></textarea><br>
+                <input type="submit" value="submit">
+              </form>
+            </div>
+        </div>
+
+        <div class="upload-button">
+            <div id="myBtn">Upload Document</div>
+        </div>
     </main>
 
-    <div class="input-footer">
-        <form class="create-document" action="/documents/createDocument" method='POST'>
-            <input class="document-input" type="text" placeholder="Enter Document Item" name='documentItem'>
-            <input class="submit" type="submit">
-        </form>
-    </div>
+
 
     <footer>
         <a class="logout" href="/logout">Logout</a>
     </footer>
 
     <script src="js/main.js"></script>
+    <script src="js/documents.js"></script>
 </body>
     
 </html>

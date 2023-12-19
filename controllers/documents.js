@@ -21,7 +21,7 @@ module.exports = {
     },
     createDocument: async (req, res)=>{
         try{
-            await Document.create({document: req.body.documentItem, completed: false, userId: req.user.id, completedByUserId: req.user.id, teacherId: req.user.teacherId, dateCreated: Date.now()})
+            await Document.create({docTitle: req.body.docTitle, docDescription: req.body.docDescription, completed: false, userId: req.user.id, completedByUserId: req.user.id, teacherId: req.user.teacherId, dateCreated: Date.now()})
             console.log('Document has been added!')
             res.redirect('/documents')
         }catch(err){
