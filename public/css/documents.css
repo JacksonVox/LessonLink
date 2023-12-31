@@ -179,6 +179,8 @@ main {
     grid-area: main;
     display: none;
     position: fixed;
+    justify-content: center;
+    align-items: center;
     z-index: 1;
     left: 0;
     top: 0;
@@ -190,11 +192,74 @@ main {
 
 .modal-content {
     background-color: #fefefe;
+    display: block;
     margin: 15% auto;
-    padding: 20px;
+    padding: 10px;
     border: 1px solid #888;
-    width: 80%;
+    border-radius: 5px;
+    max-height: 60%;
+    min-height: 40%;
+    height: auto;
+    width: 30rem;
 }
+
+.modal-content .header {
+    height: auto;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.8rem;
+    font-weight: 400;
+}
+.break-thin {
+    border-bottom: 1px solid #aaa;
+    width: 100%;
+    margin: 10px 0;
+}
+.modal-content .header i {
+    font-size: 2rem;
+}
+
+
+.modal-content form {
+    display: grid;
+    grid-template-areas: 
+        "title"
+        "title-input"
+        "description"
+        "description-input"
+        "submit";
+    gap: 10px;
+    width: 100%;
+    font-size: 1.6rem;
+}
+
+.modal-content form label[for="docTitle"] {
+    grid-area: title;
+}
+#docTitle {
+    grid-area: title-input;
+}
+
+.modal-content form label[for="docDescription"] {
+    grid-area: description;
+}
+#docDescription {
+    grid-area: description-input;
+}
+
+/* .modal-content form label[for="docPreview"] {
+    grid-area: preview;
+}
+.modal-content form label[for="docUpload"] {
+    grid-area: upload;
+}
+.modal-content form label[type="submit"] {
+    grid-area: submit;
+} */
+
+
 
 .close {
     color: #aaa;
@@ -209,6 +274,8 @@ main {
     text-decoration: none;
     cursor: pointer;
 }
+
+
 /* Upload Button */
 
 .upload-button {

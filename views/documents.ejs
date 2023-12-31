@@ -7,7 +7,7 @@
     <title>LessonLink</title>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/documents.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap" rel="stylesheet">
@@ -48,12 +48,16 @@
         </ul>
         <div id="createDocModal" class="modal">
             <div class="modal-content">
-              <span class="close">&times;</span>
+                <div class="header">
+                    <h2>Add Document</h2>
+                    <i class="close fa-regular fa-circle-xmark"></i>
+                </div>
+                <div class="break-thin"></div>
               <form action="/documents/createDocument" method='POST'>
                 <label for="docTitle">Title:</label><br>
                 <input type="text" id="docTitle" name="docTitle"><br>
                 <label for="docDescription">Description:</label><br>
-                <textarea id="docDescription" name="docDescription"></textarea><br>
+                <input id="docDescription" name="docDescription"></input><br>
                 <input type="submit" value="submit">
               </form>
             </div>

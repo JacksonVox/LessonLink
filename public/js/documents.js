@@ -1,6 +1,6 @@
-var modal = document.getElementsByClassName("modal");
-var span = document.getElementsByClassName("close")[0];
-var btn = document.getElementById("myBtn");
+const modal = document.getElementById("createDocModal");
+const span = document.getElementsByClassName("close")[0];
+const btn = document.getElementById("myBtn");
 
 span.onclick = function() {
   modal.style.display = "none";
@@ -17,5 +17,5 @@ btn.onclick = function() {
 }
 
 function openModal() {
-  modal.style.display = "block";
+  modal.style.display = "flex";
 }
