@@ -1,4 +1,5 @@
 const Document = require('../models/Document');
+const cloudinary = require('../middleware/cloudinary');
 const { v4: uuidv4 } = require('uuid');
 const { Teacher } = require('../models/Users');
 const { Student } = require('../models/Users');
@@ -21,7 +22,23 @@ module.exports = {
     },
     createDocument: async (req, res)=>{
         try{
-            await Document.create({docTitle: req.body.docTitle, docDescription: req.body.docDescription, completed: false, userId: req.user.id, completedByUserId: req.user.id, teacherId: req.user.teacherId, dateCreated: Date.now()})
+            //Upload document to cloudinary
+            const result = await cloudinary.uploader.upload(req.file.path, {resource_type: "auto", type: "upload"},
+                async function(error, result) { 
+                    if (error) {
+                        console.log(result, error);
+                    } else {
+                        await Document.create({
+                            docTitle: req.body.docTitle,
+                            docDescription: req.body.docDescription,
+                            docFile: result.secure_url,
+                            cloudinaryId: result.public_id,
+                            userId: req.user.id,
+                            teacherId: req.user.teacherId,
+                            completedByUserId: req.user.id,
+                        });
+                    }
+            });
             console.log('Document has been added!')
             res.redirect('/documents')
         }catch(err){

@@ -26,10 +26,11 @@
 
     <main>
         <ul class="document-grid">
+            <% console.log(documents) %>
             <% documents.forEach( el => { %>
             
                 <li class='document' data-id='<%=el._id%>'>
-                    <span class='document-title <%= el.completed === true ? 'completed' : 'not'%>'><%= el["docTitle"]%></span>
+                    <a href=<%= el["docFile"] %> class='document-title <%= el.completed === true ? 'completed' : 'not'%>'><%= el["docTitle"]%></a>
                     <span class='document-assignment'>
                         <i class="fas fa-clock"> 
                             <% 
@@ -53,11 +54,13 @@
                     <i class="close fa-regular fa-circle-xmark"></i>
                 </div>
                 <div class="break-thin"></div>
-              <form action="/documents/createDocument" method='POST'>
+              <form action="/documents/createDocument" enctype="multipart/form-data" method='POST'>
                 <label for="docTitle">Title:</label><br>
                 <input type="text" id="docTitle" name="docTitle"><br>
                 <label for="docDescription">Description:</label><br>
                 <input id="docDescription" name="docDescription"></input><br>
+                <label for="file">File:</label><br>
+                <input type="file" id="file" name="file"><br>
                 <input type="submit" value="submit">
               </form>
             </div>

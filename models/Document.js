@@ -9,6 +9,14 @@ const DocumentSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
+  docFile: {
+    type: String,
+    required: true,
+  },
+  cloudinaryId: {
+    type: String,
+    required: true,
+  },
   userId: {
     type: String,
     required: true,
@@ -19,11 +27,11 @@ const DocumentSchema = new mongoose.Schema({
   },
   dateCreated: {
     type: Date,
-    required: true,
+    default: Date.now,
   },
   completed: {
     type: Boolean,
-    required: true,
+    default: false,
   },
   completedByTeacherId: {
     type: String,
@@ -33,10 +41,6 @@ const DocumentSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
-  assignedToName: {
-    type: String,
-    required: false,
-  }
 })
 
 module.exports = mongoose.model('Document', DocumentSchema)
