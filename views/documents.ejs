@@ -30,7 +30,7 @@
             <% documents.forEach( el => { %>
             
                 <li class='document' data-id='<%=el._id%>'>
-                    <a href=<%= el["docFile"] %> class='document-title <%= el.completed === true ? 'completed' : 'not'%>'><%= el["docTitle"]%></a>
+                    <a href=<%= el["docFile"] %> target="_blank" class='document-title <%= el.completed === true ? 'completed' : 'not'%>'><%= el["docTitle"]%></a>
                     <span class='document-assignment'>
                         <i class="fas fa-clock"> 
                             <% 

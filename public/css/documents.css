@@ -98,8 +98,7 @@ main {
     width: 100%;
     display: grid;
     grid-template-areas: "title assignment button delete";
-    grid-template-rows: auto 1fr auto;
-    grid-template-columns: auto 1fr auto;
+    grid-template-columns: auto 1fr auto auto;
     align-items: center;
     align-content: center;
     padding: 3px;
@@ -133,6 +132,12 @@ main {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    text-decoration: none;
+    color: #5D737E;
+    margin-left: .3rem;
+}
+.document-title:hover {
+    color: #aaa;
 }
 .document-assignment {
     grid-area: assignment;
