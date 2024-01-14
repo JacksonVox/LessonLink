@@ -29,7 +29,7 @@
             <% students.forEach( el => { %>
             
                 <li class='student' data-id='<%=el._id%>'>
-                    <a href=<%= el["docFile"] %> target="_blank" class='student-title <%= el.completed === true ? 'completed' : 'not'%>'><%= el["docTitle"]%></a>
+                    <a href=<%= el["docFile"] %> target="_blank" class='student-title <%= el.completed === true ? 'completed' : 'not'%>'><%= el["title"]%></a>
                     <span class='student-assignment'>
                         <i class="fas fa-clock"> 
                             <% 
@@ -46,20 +46,18 @@
                 </li>
             <% }) %>    
         </ul>
-        <div id="createDocModal" class="modal">
+        <div id="addStudentModal" class="modal">
             <div class="modal-content">
                 <div class="header">
                     <h2>Add Student</h2>
                     <i class="close fa-regular fa-circle-xmark"></i>
                 </div>
                 <div class="break-thin"></div>
-              <form action="/students/createStudent" enctype="multipart/form-data" method='POST'>
-                <label for="docTitle">Title:</label><br>
-                <input type="text" id="docTitle" name="docTitle"><br>
-                <label for="docDescription">Description:</label><br>
-                <input id="docDescription" name="docDescription"></input><br>
-                <label for="file">File:</label><br>
-                <input type="file" id="file" name="file"><br>
+              <form action="/students/createStudent" method='POST'>
+                <label for="title">Name:</label>
+                <input type="text" id="title" name="title">
+                <label for="description">Notes:</label>
+                <textarea id="description" name="description" placeholder="Beginner Guitar etc..."></textarea>
                 <input type="submit" value="submit">
               </form>
             </div>

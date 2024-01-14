@@ -7,7 +7,6 @@ const { Student } = require('../models/Users');
 module.exports = {
     getDocuments: async (req,res)=>{
         console.log(req.user)
-        const passKey =  uuidv4();
         try{
             let documentItems = await Document.find({teacherId:req.user.teacherId})
             documentItems = documentItems.sort((a, b) => a.completed - b.completed)
@@ -15,7 +14,7 @@ module.exports = {
             const teamTeachers = await Student.find({teacherId: req.user.teacherId})
             const adminTeacher = await Teacher.findById(req.user.teacherId)
             const allTeachers = [adminTeacher, ...teamTeachers]
-            res.render('documents.ejs', {documents: documentItems, left: itemsLeft, user: req.user, teacherId: req.user.teacherId, teamTeachers: allTeachers, passKey: passKey})
+            res.render('documents.ejs', {documents: documentItems, user: req.user, teacherId: req.user.teacherId})
         }catch(err){
             console.log(err)
         }
@@ -29,8 +28,8 @@ module.exports = {
                         console.log(result, error);
                     } else {
                         await Document.create({
-                            docTitle: req.body.docTitle,
-                            docDescription: req.body.docDescription,
+                            title: req.body.title,
+                            description: req.body.description,
                             docFile: result.secure_url,
                             cloudinaryId: result.public_id,
                             userId: req.user.id,

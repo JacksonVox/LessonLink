@@ -1,11 +1,11 @@
 const mongoose = require('mongoose')
 
 const DocumentSchema = new mongoose.Schema({
-  docTitle: {
+  title: {
     type: String,
     required: true,
   },
-  docDescription: {
+  description: {
     type: String,
     required: false,
   },
