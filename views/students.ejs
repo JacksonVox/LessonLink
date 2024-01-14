@@ -29,7 +29,7 @@
             <% students.forEach( el => { %>
             
                 <li class='student' data-id='<%=el._id%>'>
-                    <a href=<%= el["docFile"] %> target="_blank" class='student-title <%= el.completed === true ? 'completed' : 'not'%>'><%= el["title"]%></a>
+                    <a href=<%= el["file"] %> target="_blank" class='student-title <%= el.completed === true ? 'completed' : 'not'%>'><%= el["title"]%></a>
                     <span class='student-assignment'>
                         <i class="fas fa-clock"> 
                             <% 

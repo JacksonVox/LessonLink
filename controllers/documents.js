@@ -30,7 +30,7 @@ module.exports = {
                         await Document.create({
                             title: req.body.title,
                             description: req.body.description,
-                            docFile: result.secure_url,
+                            file: result.secure_url,
                             cloudinaryId: result.public_id,
                             userId: req.user.id,
                             teacherId: req.user.teacherId,

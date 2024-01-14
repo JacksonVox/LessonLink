@@ -9,7 +9,7 @@ const DocumentSchema = new mongoose.Schema({
     type: String,
     required: false,
   },
-  docFile: {
+  file: {
     type: String,
     required: true,
   },
