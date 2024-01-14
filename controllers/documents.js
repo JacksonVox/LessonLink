@@ -69,7 +69,9 @@ module.exports = {
     deleteDocument: async (req, res)=>{
         console.log(req.body.documentIdFromJSFile)
         try{
-            await Document.findOneAndDelete({_id:req.body.documentIdFromJSFile})
+            let document = await Document.findById({ _id: req.body.documentIdFromJSFile });
+            await cloudinary.uploader.destroy(document.cloudinaryId);
+            await Document.deleteOne({ _id:req.body.documentIdFromJSFile });
             console.log('Deleted Document')
             res.json('Deleted It')
         }catch(err){
