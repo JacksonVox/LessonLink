@@ -1,70 +1,94 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LessonLink</title>
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/students.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LessonLink</title>
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/students.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap" rel="stylesheet">
 </head>
+
 <body>
-    <header>
-        <h1>LessonLink</h1>
-    </header>
+  <header>
+    <h1>LessonLink</h1>
+  </header>
 
-    <nav>
-        <ul>
-            <li><a href="/documents">Documents</a></li>
-            <li><a href="/students">Students</a></li>
-        </ul>
-    </nav>
+  <nav>
+    <ul>
+      <li><a href="/documents">Documents</a></li>
+      <li><a href="/students">Students</a></li>
+    </ul>
+  </nav>
 
-    <main>
-        <ul class="student-grid">
-            <% students.forEach( el => { %>
-            
-                <li class='student' data-id='<%=el._id%>'>
-                    <span target="_blank" class='student-name <%= el.completed === true ? 'completed' : 'not'%>'><%= el["userName"]%></span>
-                    <span class='student-assignment'></span>
-                    <span class='delete-button fas fa-trash-alt'></span>
-                </li>
-            <% }) %>    
-        </ul>
-        <div id="addStudentModal" class="modal">
-            <div class="modal-content">
-                <div class="header">
-                    <h2>Add Student</h2>
-                    <i class="close fa-regular fa-circle-xmark"></i>
-                </div>
-                <div class="break-thin"></div>
-                <form action="/addStudent/<%= teacherId %>/<%= passKey %>" method='POST'>
-                    <label for="title">Name:</label>
-                    <input type="text" id="title" name="userName">
-                    <label for="description">Notes:</label>
-                    <textarea id="description" name="note" placeholder="Beginner Guitar etc..."></textarea>
-                    <input type="submit" value="submit">
-                </form>
-            </div>
+  <main>
+    <ul class="student-grid">
+      <% students.forEach( el => { %>
+
+      <li class='student' data-id='<%=el._id%>'>
+        <span class='student-name <%= el.completed === true ? 'completed' : 'not'%>'><%= el["userName"]%></span>
+        <span class='student-assignment'></span>
+        <span class='delete-button fas fa-trash-alt'></span>
+      </li>
+      <% }) %>
+    </ul>
+    <!-- MODALS -->
+    <!-- Add Student -->
+    <div id="addStudentModal" class="modal">
+      <div class="modal-content">
+        <div class="header">
+          <h2>Add Student</h2>
+          <i class="close fa-regular fa-circle-xmark"></i>
         </div>
+        <div class="break-thin"></div>
+        <form action="/addStudent/<%= teacherId %>/<%= passKey %>" method='POST'>
+          <label for="title">Name:</label>
+          <input type="text" class="name" name="userName">
+          <label for="description">Notes:</label>
+          <textarea class="description" name="note" placeholder="Beginner Guitar etc..."></textarea>
+          <input type="submit" value="submit">
+        </form>
+      </div>
+    </div>
 
-        <div class="upload-button">
-            <div id="myBtn">Add Student</div>
+    <!-- View Student -->
+    <div id="viewStudentModal" class="modal">
+      <div class="modal-content">
+        <div class="header">
+          <h2><%=  %></h2>
+          <i class="close fa-regular fa-circle-xmark"></i>
         </div>
-    </main>
+        <div class="break-thin"></div>
+        <form action="/editStudent/" method="">
+          <label for="title">Name:</label>
+          <input type="text" class="name" name="userName" readonly>
+          <label for="description">Notes:</label>
+          <textarea class="description" name="note" placeholder="Beginner Guitar etc..." readonly></textarea>
+          <input type="submit" value="submit">
+        </form>
+      </div>
+    </div>
 
 
 
-    <footer>
-        <a class="logout" href="/logout">Logout</a>
-    </footer>
+    <div class="upload-button">
+      <div id="addStudentButton">Add Student</div>
+    </div>
+  </main>
 
-    <script src="js/main.js"></script>
-    <script src="js/students.js"></script>
+
+
+  <footer>
+    <a class="logout" href="/logout">Logout</a>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/students.js"></script>
 </body>
-    
+
 </html>
