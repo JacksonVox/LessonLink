@@ -135,6 +135,7 @@ main {
     text-decoration: none;
     color: #5D737E;
     margin-left: .3rem;
+    cursor: pointer;
 }
 .student-name:hover {
     color: #aaa;
