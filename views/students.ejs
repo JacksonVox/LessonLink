@@ -29,19 +29,8 @@
             <% students.forEach( el => { %>
             
                 <li class='student' data-id='<%=el._id%>'>
-                    <a href=<%= el["file"] %> target="_blank" class='student-title <%= el.completed === true ? 'completed' : 'not'%>'><%= el["title"]%></a>
-                    <span class='student-assignment'>
-                        <i class="fas fa-clock"> 
-                            <% 
-                                let date_ob = new Date(el.dateCreated);
-                                let date = ("0" + date_ob.getDate()).slice(-2);
-                                let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
-                                let year = date_ob.getFullYear();
-                                let formattedDate = month + "-" + date + "-" + year;
-                            %>
-                            <%= formattedDate %>
-                        </i>
-                    </span>
+                    <span target="_blank" class='student-name <%= el.completed === true ? 'completed' : 'not'%>'><%= el["userName"]%></span>
+                    <span class='student-assignment'></span>
                     <span class='delete-button fas fa-trash-alt'></span>
                 </li>
             <% }) %>    
@@ -53,13 +42,13 @@
                     <i class="close fa-regular fa-circle-xmark"></i>
                 </div>
                 <div class="break-thin"></div>
-              <form action="/students/createStudent" method='POST'>
-                <label for="title">Name:</label>
-                <input type="text" id="title" name="title">
-                <label for="description">Notes:</label>
-                <textarea id="description" name="description" placeholder="Beginner Guitar etc..."></textarea>
-                <input type="submit" value="submit">
-              </form>
+                <form action="/addStudent/<%= teacherId %>/<%= passKey %>" method='POST'>
+                    <label for="title">Name:</label>
+                    <input type="text" id="title" name="userName">
+                    <label for="description">Notes:</label>
+                    <textarea id="description" name="note" placeholder="Beginner Guitar etc..."></textarea>
+                    <input type="submit" value="submit">
+                </form>
             </div>
         </div>
 

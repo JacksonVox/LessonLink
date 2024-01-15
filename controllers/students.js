@@ -7,8 +7,7 @@ module.exports = {
         console.log(req.user)
         const passKey =  uuidv4();
         try{
-            let students = await Student.find({teacherId:req.user.teacherId})
-            students = students.sort((a, b) => a.completed - b.completed)
+            let students = await Student.find({teacherId:req.user.teacherId}).sort({userName: 1})
             const adminTeacher = await Teacher.findById(req.user.teacherId)
             res.render('students.ejs', {students: students, user: req.user, teacherId: req.user.teacherId, passKey: passKey})
         }catch(err){

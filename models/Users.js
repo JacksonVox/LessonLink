@@ -11,6 +11,7 @@ const TeacherSchema = new mongoose.Schema({
 
 const StudentSchema = new mongoose.Schema({
   userName: { type: String, unique: false },
+  note: { type: String, unique: false },
   passKey: { type: String, unique: true },
   teacherId: { type: String, unique: false },
   isAdmin: Boolean

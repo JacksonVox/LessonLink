@@ -2,6 +2,7 @@ const modal = document.getElementById("addStudentModal");
 const span = document.getElementsByClassName("close")[0];
 const btn = document.getElementById("myBtn");
 
+
 span.onclick = function() {
   modal.style.display = "none";
 }
@@ -17,5 +18,18 @@ btn.onclick = function() {
 }
 
 function openModal() {
+  modal.style.display = "flex";
+}
+
+
+// Event Listeners
+
+const studentBtn = document.querySelectorAll('.student-name')
+
+studentBtn.onclick = function() {
+    openStudentModal();
+}
+
+function openStudentModal() {
   modal.style.display = "flex";
 }

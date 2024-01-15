@@ -93,11 +93,3 @@ async function markIncomplete(){
     }
 }
 
-// On window content loaded
-
-window.addEventListener('DOMContentLoaded', (event) => {
-    const documentInput = document.querySelector('.document-input');
-    if (documentInput) {
-        documentInput.focus();
-    }
-});

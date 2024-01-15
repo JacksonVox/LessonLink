@@ -99,7 +99,7 @@ const { Student } = require('../models/Users')
 
   exports.getAddStudent = (req, res, next) => {
     const userPassKey = req.params.passKey;
-    const teacherId = req.params.teacherId; // Define teacherId here
+    const teacherId = req.params.teacherId;
     let adminName;
 
     Teacher.findOne({_id: teacherId}, (err, user) => {
