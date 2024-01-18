@@ -170,7 +170,7 @@ exports.postAddStudent = (req, res) => {
       if (err) {
         return next(err);
       }
-      res.redirect("/documents");
+      res.redirect("/students");
     });
   });
 };

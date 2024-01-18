@@ -245,11 +245,14 @@ main {
     margin-top: auto;
     height: 3rem;
 }
+/* #viewStudentModal input[type="submit"] {
+    display: none;
+} */
 
 
 .close {
     color: #aaa;
-    float: right;
+    margin-left: auto;
     font-size: 28px;
     font-weight: bold;
 }

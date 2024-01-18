@@ -31,9 +31,8 @@
       <% students.forEach( el => { %>
 
       <li class='student' data-id='<%=el._id%>'>
-        <span class='student-name <%= el.completed === true ? 'completed' : 'not'%>'><%= el["userName"]%></span>
-        <span class='student-assignment'></span>
-        <span class='delete-button fas fa-trash-alt'></span>
+        <span class='student-name'><%= el["userName"]%></span>
+        <span class='student-notes'></span>
       </li>
       <% }) %>
     </ul>
@@ -56,24 +55,7 @@
       </div>
     </div>
 
-    <!-- View Student -->
-    <div id="viewStudentModal" class="modal">
-      <div class="modal-content">
-        <div class="header">
-          <h2><%=  %></h2>
-          <i class="close fa-regular fa-circle-xmark"></i>
-        </div>
-        <div class="break-thin"></div>
-        <form action="/editStudent/" method="">
-          <label for="title">Name:</label>
-          <input type="text" class="name" name="userName" readonly>
-          <label for="description">Notes:</label>
-          <textarea class="description" name="note" placeholder="Beginner Guitar etc..." readonly></textarea>
-          <input type="submit" value="submit">
-        </form>
-      </div>
-    </div>
-
+    
 
 
     <div class="upload-button">

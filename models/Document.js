@@ -17,10 +17,6 @@ const DocumentSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  userId: {
-    type: String,
-    required: true,
-  },
   teacherId: {
     type: String,
     required: true,

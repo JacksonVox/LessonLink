@@ -32,7 +32,6 @@ module.exports = {
                             description: req.body.description,
                             file: result.secure_url,
                             cloudinaryId: result.public_id,
-                            userId: req.user.id,
                             teacherId: req.user.teacherId,
                             completedByUserId: req.user.id,
                         });

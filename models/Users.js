@@ -6,7 +6,7 @@ const TeacherSchema = new mongoose.Schema({
   email: { type: String, unique: true },
   password: String,
   teacherId: { type: String, unique: false },
-  isAdmin: Boolean
+  accountType: { type: String, default: "teacher" }
 })
 
 const StudentSchema = new mongoose.Schema({
@@ -14,7 +14,9 @@ const StudentSchema = new mongoose.Schema({
   note: { type: String, unique: false },
   passKey: { type: String, unique: true },
   teacherId: { type: String, unique: false },
-  isAdmin: Boolean
+  accountType: { type: String, default: "student" },
+  assignments: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Documents' }],
+  assignmentsCompleted: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Documents' }]
 })
 
 

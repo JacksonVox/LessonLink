@@ -29,23 +29,10 @@ function openAddStudentModal() {
 
 // Event Listeners
 
+//Student List Listeners
 const studentBtn = document.querySelectorAll(".student-name");
 
 Array.from(studentBtn).forEach((el) => {
   el.addEventListener("click", openViewStudentModal);
 });
-
-async function openViewStudentModal() {
-  let selectedStudentId = this.parentNode.dataset.id;
-  
-  let response = await fetch(`/students/viewStudent/${selectedStudentId}`);
-  if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`);
-  }
-
-  let selectedStudent = await response.json();
-
-  document.querySelector("#viewStudentModal .name").value = selectedStudent.userName;
-  document.querySelector("#viewStudentModal .description").value = selectedStudent.note;
-  viewStudentModal.style.display = "flex";
-}
+[]

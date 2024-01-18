@@ -8,9 +8,11 @@ const { ensureAuth } = require("../middleware/auth");
 
 router.get("/", ensureAuth, studentsController.getStudents);
 
-router.get("/addStudent/:teacherId/:passKey", authController.getAddStudent);
-router.post("/addStudent/:teacherId/:passKey", authController.postAddStudent);
-
 router.get("/viewStudent/:studentId", ensureAuth, studentsController.getViewStudent);
+
+router.post("/assignDocument", studentsController.postAssignDocument);
+
+router.put("/markComplete", studentsController.putMarkComplete);
+router.put("/markIncomplete", studentsController.putMarkIncomplete);
 
 module.exports = router;
