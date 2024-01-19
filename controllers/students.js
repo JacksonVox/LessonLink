@@ -43,10 +43,28 @@ module.exports = {
     try {
       const student = await Student.findById(req.body.studentId);
       const document = req.body.document;
+      if (document !== null){
       student.assignments.push(document);
       student.save();
       res.redirect("/students/viewStudent/" + student._id)
-      } catch (err) {
+      }} catch (err) {
+      console.log(err);
+    }
+  },
+  putUnassignDocument: async (req, res) => {
+    try {
+      const student = await Student.findById(req.body.studentId);
+      console.log(student);
+      const document = req.body.assignmentId;
+      const index = student.assignments.indexOf(document);
+    
+    //check if document exists in array
+    if (index !== -1) {
+      student.assignments.splice(index, 1);
+      await student.save();
+    }
+    res.status(200).send({ message: 'Document unassigned successfully' });
+    } catch (err) {
       console.log(err);
     }
   },

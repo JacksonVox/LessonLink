@@ -11,6 +11,7 @@ router.get("/", ensureAuth, studentsController.getStudents);
 router.get("/viewStudent/:studentId", ensureAuth, studentsController.getViewStudent);
 
 router.post("/assignDocument", studentsController.putAssignDocument);
+router.put("/unassignDocument", studentsController.putUnassignDocument);
 
 router.put("/markComplete", studentsController.putMarkComplete);
 router.put("/markIncomplete", studentsController.putMarkIncomplete);
