@@ -39,14 +39,14 @@ module.exports = {
       console.log(err);
     }
   },
-  postAssignDocument: async (req, res) => {
+  putAssignDocument: async (req, res) => {
     try {
       const student = await Student.findById(req.body.studentId);
-      const document = req.body.documentId;
+      const document = req.body.document;
       student.assignments.push(document);
       student.save();
-      res.json(student);
-    } catch (err) {
+      res.redirect("/students/viewStudent/" + student._id)
+      } catch (err) {
       console.log(err);
     }
   },

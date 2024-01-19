@@ -39,10 +39,18 @@
         <h4>Notes:</h4>
         <p><%= student.note %></p>
       </div>
-      <% console.log(documents) %>
 
       <div>
         <h3>Assignments:</h3>
+        <form action="/students/assignDocument" method="POST">
+          <select name="document">
+            <% documents.forEach(function(document) { %>
+              <option value="<%= document._id %>"><%= document.title %></option>
+            <% }); %>
+          </select>
+          <input type="hidden" name="studentId" value="<%= student._id %>">
+          <input type="submit" value="Assign">
+        </form>
         <ul class="assignment-list">
           <% student.assignments.forEach(function(assignment) { %>
             <% let document = documents.find(el => el._id.toString() === assignment.toString()); %>

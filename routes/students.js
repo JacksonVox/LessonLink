@@ -10,7 +10,7 @@ router.get("/", ensureAuth, studentsController.getStudents);
 
 router.get("/viewStudent/:studentId", ensureAuth, studentsController.getViewStudent);
 
-router.post("/assignDocument", studentsController.postAssignDocument);
+router.post("/assignDocument", studentsController.putAssignDocument);
 
 router.put("/markComplete", studentsController.putMarkComplete);
 router.put("/markIncomplete", studentsController.putMarkIncomplete);

@@ -6,7 +6,7 @@ let selectedStudentId = null;
 
 // Close Modals
 document.onclick = function (event) {
-  if (event.target == addStudentModal || event.target == viewStudentModal || event.target == closeBtn) {
+  if (event.target.matches("#addStudentModal") || event.target.matches("#viewStudentModal") || event.target.matches(".close")) {
     addStudentModal.style.display = "none";
     viewStudentModal.style.display = "none";
   }
