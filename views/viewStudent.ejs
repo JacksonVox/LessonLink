@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LessonLink</title>
+  <link rel="stylesheet" href="/css/reset.css">
+  <link rel="stylesheet" href="/css/viewStudent.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <header>
+    <h1>LessonLink</h1>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="/documents">Documents</a></li>
+      <li><a href="/students">Students</a></li>
+    </ul>
+  </nav>
+  
+  <main>
+    <div class="second-nav">
+      <a href="/students">Return to all Students</a>
+    </div>
+
+    <div class="student-view">
+      
+        <h3 class="student-name"><%= student.userName %></h3>
+      
+      <div>
+        <h4>Notes:</h4>
+        <p><%= student.note %></p>
+      </div>
+      <% console.log(documents) %>
+
+      <div>
+        <h3>Assignments:</h3>
+        <ul class="assignment-list">
+          <% student.assignments.forEach(function(assignment) { %>
+            <% let document = documents.find(el => el._id.toString() === assignment.toString()); %>
+              <li class="assignment" data-id="<%= document._id %>">
+              <a href=<%= document["file"] %> target="_blank" class='assignment-title'><%= document["title"]%></a>
+              <span class='delete-button fas fa-trash-alt'></span>
+              </li>
+          <% }); %>
+        </ul>
+      </div>
+
+    </div>
+  </main>
+
+
+
+  <footer>
+    <a class="logout" href="/logout">Logout</a>
+  </footer>
+
+  <script src="/js/main.js"></script>
+  <script src="/js/students.js"></script>
+</body>
+
+</html>

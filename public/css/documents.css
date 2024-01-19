@@ -139,7 +139,7 @@ main {
 .document-title:hover {
     color: #aaa;
 }
-.document-assignment {
+.date-assigned{
     grid-area: assignment;
     font-size: 1.2rem;
     justify-self: end;
@@ -263,7 +263,7 @@ main {
 
 /* Upload Button */
 
-.upload-button {
+.btn1 {
     width: auto;
     font-size: 1.8rem;
     font-family: "Roboto", sans-serif;
@@ -274,7 +274,7 @@ main {
     margin-bottom: 10rem;
 }
 
-.upload-button :hover {
+.btn1 :hover {
     background-color: #5D737E;
     border-color: #786F78;
     cursor: pointer;

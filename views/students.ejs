@@ -31,7 +31,9 @@
       <% students.forEach( el => { %>
 
       <li class='student' data-id='<%=el._id%>'>
-        <span class='student-name'><%= el["userName"]%></span>
+        <a href="/students/viewStudent/<%= el._id %>">
+          <div class='student-name'><%= el["userName"]%></div>
+        </a>
         <span class='student-notes'></span>
       </li>
       <% }) %>
@@ -58,7 +60,7 @@
     
 
 
-    <div class="upload-button">
+    <div class="btn1">
       <div id="addStudentButton">Add Student</div>
     </div>
   </main>

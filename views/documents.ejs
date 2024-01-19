@@ -1,84 +1,86 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LessonLink</title>
-    <link rel="stylesheet" href="css/reset.css">
-    <link rel="stylesheet" href="css/documents.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LessonLink</title>
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/documents.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap" rel="stylesheet">
 </head>
+
 <body>
-    <header>
-        <h1>LessonLink</h1>
-    </header>
+  <header>
+    <h1>LessonLink</h1>
+  </header>
 
-    <nav>
-        <ul>
-            <li><a href="/documents">Documents</a></li>
-            <li><a href="/students">Students</a></li>
-        </ul>
-    </nav>
+  <nav>
+    <ul>
+      <li><a href="/documents">Documents</a></li>
+      <li><a href="/students">Students</a></li>
+    </ul>
+  </nav>
 
-    <main>
-        <ul class="document-grid">
-            <% console.log(documents) %>
-            <% documents.forEach( el => { %>
-            
-                <li class='document' data-id='<%=el._id%>'>
-                    <a href=<%= el["file"] %> target="_blank" class='document-title <%= el.completed === true ? 'completed' : 'not'%>'><%= el["title"]%></a>
-                    <span class='document-assignment'>
-                        <i class="fas fa-clock"> 
-                            <% 
-                                let date_ob = new Date(el.dateCreated);
-                                let date = ("0" + date_ob.getDate()).slice(-2);
-                                let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
-                                let year = date_ob.getFullYear();
-                                let formattedDate = month + "-" + date + "-" + year;
-                            %>
-                            <%= formattedDate %>
-                        </i>
-                    </span>
-                    <span class='delete-button fas fa-trash-alt'></span>
-                </li>
-            <% }) %>    
-        </ul>
-        <div id="createDocModal" class="modal">
-            <div class="modal-content">
-                <div class="header">
-                    <h2>Add Document</h2>
-                    <i class="close fa-regular fa-circle-xmark"></i>
-                </div>
-                <div class="break-thin"></div>
-              <form action="/documents/createDocument" enctype="multipart/form-data" method='POST'>
-                <label for="title">Title:</label>
-                <input type="text" id="title" name="title">
-                <label for="description">Description:</label>
-                <input id="description" name="description"></input>
-                <label for="file">File:</label>
-                <input type="file" id="file" name="file">
-                <input type="submit" value="submit">
-              </form>
-            </div>
+  <main>
+    <ul class="document-grid">
+      <% console.log(documents) %>
+      <% documents.forEach( el => { %>
+
+      <li class='document' data-id='<%=el._id%>'>
+        <a href=<%= el["file"] %> target="_blank" class='document-title <%= el.completed === true ? 'completed' : 'not'%>'><%= el["title"]%></a>
+        <span class='date-assigned'>
+          <i class="fas fa-clock">
+            <% 
+              let date_ob = new Date(el.dateCreated);
+              let date = ("0" + date_ob.getDate()).slice(-2);
+              let month = ("0" + (date_ob.getMonth() + 1)).slice(-2);
+              let year = date_ob.getFullYear();
+              let formattedDate = month + "-" + date + "-" + year;
+            %>
+            <%= formattedDate %>
+          </i>
+        </span>
+        <span class='delete-button fas fa-trash-alt'></span>
+      </li>
+      <% }) %>
+    </ul>
+    <div id="createDocModal" class="modal">
+      <div class="modal-content">
+        <div class="header">
+          <h2>Add Document</h2>
+          <i class="close fa-regular fa-circle-xmark"></i>
         </div>
+        <div class="break-thin"></div>
+        <form action="/documents/createDocument" enctype="multipart/form-data" method='POST'>
+          <label for="title">Title:</label>
+          <input type="text" id="title" name="title">
+          <label for="description">Description:</label>
+          <input id="description" name="description"></input>
+          <label for="file">File:</label>
+          <input type="file" id="file" name="file">
+          <input type="submit" value="submit">
+        </form>
+      </div>
+    </div>
 
-        <div class="upload-button">
-            <div id="myBtn">Upload Document</div>
-        </div>
-    </main>
+    <div class="btn1">
+      <div id="myBtn">Upload Document</div>
+    </div>
+  </main>
 
 
 
-    <footer>
-        <a class="logout" href="/logout">Logout</a>
-    </footer>
+  <footer>
+    <a class="logout" href="/logout">Logout</a>
+  </footer>
 
-    <script src="js/main.js"></script>
-    <script src="js/documents.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/documents.js"></script>
 </body>
-    
+
 </html>

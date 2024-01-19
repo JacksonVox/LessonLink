@@ -26,8 +26,15 @@ module.exports = {
   },
   getViewStudent: async (req, res) => {
     try {
-      const student = await Student.findById(req.params.studentId);
-      res.json(student);
+      let student = await Student.findOne({ _id: req.params.studentId });
+      let documents = await Document.find({ teacherId: req.user.teacherId });
+      // check student data
+      console.log(student);
+      res.render("viewStudent.ejs", {
+        student: student,
+        user: req.user,
+        documents: documents,
+      });
     } catch (err) {
       console.log(err);
     }
