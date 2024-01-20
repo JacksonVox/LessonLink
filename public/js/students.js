@@ -23,9 +23,3 @@ function openAddStudentModal() {
 // Event Listeners
 
 //Student List Listeners
-const studentBtn = document.querySelectorAll(".student-name");
-
-Array.from(studentBtn).forEach((el) => {
-  el.addEventListener("click", viewStudent);
-});
-[]

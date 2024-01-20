@@ -43,7 +43,9 @@ module.exports = {
     try {
       const student = await Student.findById(req.body.studentId);
       const document = req.body.document;
-      if (document !== null){
+      if (student.assignments.includes(document)){
+        res.redirect("/students/viewStudent/" + student._id)
+      } else if (document !== null){
       student.assignments.push(document);
       student.save();
       res.redirect("/students/viewStudent/" + student._id)
@@ -54,7 +56,6 @@ module.exports = {
   putUnassignDocument: async (req, res) => {
     try {
       const student = await Student.findById(req.body.studentId);
-      console.log(student);
       const document = req.body.assignmentId;
       const index = student.assignments.indexOf(document);
     
@@ -70,22 +71,22 @@ module.exports = {
   },
   putMarkComplete: async (req, res) => {
     try {
-      const student = await Student.findById(req.params.studentId);
-      const document = req.params.documentId;
+      const student = await Student.findById(req.body.studentId);
+      const document = req.body.assignmentId;
       student.assignmentsCompleted.push(document);
       student.save();
-      res.json(student);
+      res.status(200).send({ message: 'Document marked complete successfully' });
     } catch (err) {
       console.log(err);
     }
   },
   putMarkIncomplete: async (req, res) => {
     try {
-      const student = await Student.findById(req.params.studentId);
-      const document = req.params.documentId;
-      student.assignmentsCompleted.splice(assignmentsCompleted.indexOf(document), 1);
+      const student = await Student.findById(req.body.studentId);
+      const document = req.body.assignmentId;
+      student.assignmentsCompleted.splice(student.assignmentsCompleted.indexOf(document), 1);
       student.save();
-      res.json(student);
+      res.status(200).send({ message: 'Document marked incomplete successfully' });
     } catch (err) {
       console.log(err);
     }

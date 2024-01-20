@@ -1,19 +1,6 @@
 const assignmentList = document.querySelector('.assignment-list');
 
 
-// Event Listeners
-
-// Assignment List Listener
-assignmentList.addEventListener('click', function(event) {
-  if (event.target.matches('.delete-button')) {
-    routeUnassignDocument(event);
-  } else if (event.target.matches('button.not')) {
-    addComplete(event);
-  } else if (event.target.matches('button.completed')) {
-    removeComplete(event);
-  }
-});
-
 // Functions
 function routeUnassignDocument(event) {
   const assignmentId = event.target.parentElement.getAttribute('data-id');
@@ -36,3 +23,57 @@ function routeUnassignDocument(event) {
   })
   .catch(error => console.error(error));
 }
+
+function routeMarkComplete(event) {
+  const assignmentId = event.target.parentElement.getAttribute('data-id');
+  const studentId = event.target.parentElement.getAttribute('data-student-id');
+
+  fetch(`/students/markComplete`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ studentId, assignmentId }),
+  })
+  .then(response => {
+    if (response.ok) {
+      location.reload();
+    } else {
+      console.error('Failed to mark document complete');
+    }
+  })
+  .catch(error => console.error(error));
+}
+
+function routeMarkIncomplete(event) {
+  const assignmentId = event.target.parentElement.getAttribute('data-id');
+  const studentId = event.target.parentElement.getAttribute('data-student-id');
+
+  fetch(`/students/markIncomplete`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ studentId, assignmentId }),
+  })
+  .then(response => {
+    if (response.ok) {
+      location.reload();
+    } else {
+      console.error('Failed to mark document incomplete');
+    }
+  })
+  .catch(error => console.error(error));
+}
+
+
+// Assignment List Listener
+assignmentList.addEventListener('click', function(event) {
+  if (event.target.matches('.delete-button')) {
+    routeUnassignDocument(event);
+  } else if (event.target.matches('.incomplete > .markCompleteCheckbox')) {
+    routeMarkComplete(event);
+  } else if (event.target.matches('.complete > .markCompleteCheckbox')) {
+    routeMarkIncomplete(event);
+  }
+});

@@ -56,8 +56,9 @@
         <ul class="assignment-list">
           <% student.assignments.reverse().forEach(function(assignment) { %>
             <% let document = documents.find(el => el._id.toString() === assignment.toString()); %>
-              <li class="assignment" data-id="<%= document._id %>" data-student-id="<%= student._id %>">
+              <li class="assignment <%= student.assignmentsCompleted.includes(document._id) ? 'complete' : 'incomplete' %>" data-id="<%= document._id %>" data-student-id="<%= student._id %>">
                 <a href=<%= document["file"] %> target="_blank" class='assignment-title'><%= document["title"]%></a>
+                <input type="checkbox" class="markCompleteCheckbox" <%= student.assignmentsCompleted.includes(document._id) ? 'checked' : '' %>>
                 <span class='delete-button fas fa-trash-alt'></span>
               </li>
           <% }); %>

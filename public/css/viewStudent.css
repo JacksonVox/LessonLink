@@ -168,7 +168,7 @@ main {
   margin-right: 12px;
   color: #5D737E;
 }
-.completed{
+.complete > .assignment-title{
   color: #5D737E;
   text-decoration: line-through #5D737E;
 }
