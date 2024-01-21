@@ -29,7 +29,7 @@
   <main>
     <div class="second-nav">
       <a href="/students">Return to all Students</a>
-      <a href="/studentHome/<%= student._id %>">Invite this student!</a>
+      <a id="openInviteStudentModal" data-student-id="<%= student._id %>">Invite this student!</a>
     </div>
 
     <div class="student-view">
@@ -66,6 +66,21 @@
         </ul>
       </div>
 
+    </div>
+
+    <!-- MODALS -->
+    <div id="inviteStudentModal" class="modal">
+      <div class="modal-content">
+        <div class="header">
+          <h2>Invite Student</h2>
+          <i class="close fa-regular fa-circle-xmark"></i>
+        </div>
+        <div class="break-thin"></div>
+        <form>
+          <input type="text" id="inviteLink" value="http://localhost:2121/studentHome/<%= student._id %>" >
+          <button id="copyInviteLink">Copy Link</button>
+        </form>
+      </div>
     </div>
   </main>
 
