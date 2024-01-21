@@ -2,15 +2,15 @@ const express = require('express');
 const router = express.Router();
 const upload = require("../middleware/multer");
 const documentsController = require('../controllers/documents');
-const { ensureAuth } = require('../middleware/auth');
+const { ensureAuth, ensureTeacher } = require('../middleware/auth');
 
-router.get('/', ensureAuth, documentsController.getDocuments);
+router.get('/', ensureAuth, ensureTeacher, documentsController.getDocuments);
 
-router.post('/createDocument', upload.single("file"), documentsController.createDocument);
+router.post('/createDocument', ensureTeacher, upload.single("file"), documentsController.createDocument);
 
-router.delete('/deleteDocument', documentsController.deleteDocument);
+router.delete('/deleteDocument', ensureTeacher, documentsController.deleteDocument);
 
-router.get('/getTeachersByTeacherId', documentsController.getTeachersByTeacherId);
+router.get('/getTeachersByTeacherId', ensureTeacher, documentsController.getTeachersByTeacherId);
 
 
 module.exports = router;

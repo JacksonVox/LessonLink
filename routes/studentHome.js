@@ -9,7 +9,4 @@ const { ensureAuth } = require("../middleware/auth");
 
 router.get("/:studentId", ensureAuth, studentHomeController.getIndex);
 
-router.put("/markComplete", studentsController.putMarkComplete);
-router.put("/markIncomplete", studentsController.putMarkIncomplete);
-
 module.exports = router;
