@@ -119,41 +119,6 @@ exports.postSignup = (req, res, next) => {
   );
 };
 
-exports.getAddStudent = (req, res, next) => {
-  const userPassKey = req.params.passKey;
-  const teacherId = req.params.teacherId;
-  let adminName;
-
-  Teacher.findOne({ _id: teacherId }, (err, user) => {
-    if (err) {
-      console.error(err);
-    } else {
-      adminName = user.userName;
-    }
-  });
-
-  Student.findOne({ passKey: userPassKey }, (err, existingUser) => {
-    if (err) {
-      return next(err);
-    }
-
-    if (existingUser) {
-      req.logIn(existingUser, (err) => {
-        if (err) {
-          return next(err);
-        }
-        res.redirect("/documents");
-      });
-    } else {
-      res.render("addStudent", {
-        teacherId: teacherId,
-        passKey: userPassKey,
-        adminName: adminName,
-      });
-    }
-  });
-};
-
 exports.postAddStudent = (req, res) => {
   const student = new Student({
     userName: req.body.userName,
@@ -170,7 +135,7 @@ exports.postAddStudent = (req, res) => {
       if (err) {
         return next(err);
       }
-      res.redirect("/students");
+      res.redirect("/students/viewStudent/" + student._id);
     });
   });
 };

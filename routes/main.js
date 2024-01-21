@@ -10,7 +10,6 @@ router.post('/login', authController.postLogin)
 router.get('/logout', authController.logout)
 router.get('/signup', authController.getSignup)
 router.post('/signup', authController.postSignup)
-router.get('/addStudent/:teacherId/:passKey', authController.getAddStudent)
 router.post('/addStudent/:teacherId/:passKey', authController.postAddStudent)
 
 module.exports = router
