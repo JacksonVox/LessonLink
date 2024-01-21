@@ -1,0 +1,356 @@
+/* REM */
+html {
+  font-size: 62.5%; /*1 rem = 10 px */
+}
+
+
+/*********** BODY *************/
+
+
+body {
+  display: grid;
+  grid-template-areas: 
+    "header"
+    "nav"
+    "main"
+    "footer";
+  grid-template-rows: auto auto 1fr auto;
+  height: 100vh;
+  max-width: 400px;
+  margin: auto;
+  font-size: 2rem;
+  color: #333333;
+  background-color: #F4F4F4;
+}
+
+body * {
+  display: inline-block;
+  box-sizing: border-box;
+}
+
+/******* HEADER *******/
+header {
+  grid-area: header;
+  align-self: center;
+  justify-self: center;
+  margin: 20px 0;
+}
+header h1 {
+  font-size: 4rem;
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  font-style: italic;
+  color: #64B6AC;
+}
+
+/******* NAV *******/
+
+nav {
+  grid-area: nav;
+  align-self: center;
+  justify-self: center;
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-evenly;
+  background-color: #F4F4F4; /* Background color */
+  padding: 10px 0;
+  margin: 20px 0;
+}
+
+nav a {
+  color: #5D737E; /* Primary color */
+  text-decoration: none;
+  font-size: 2.5rem; /* Increased font size */
+  font-family: "Roboto", sans-serif;
+  font-weight: 500;
+  margin: 0 20px;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: #64B6AC; /* Secondary color */
+}
+
+/******* MAIN *******/
+main {
+  grid-area: main;
+  align-self: center;
+  justify-self: center;
+  height: 100%;
+  width: 90%;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  justify-content: space-between;
+  font-family: "Roboto", sans-serif;
+  font-weight: 300;
+}
+
+/* Second Nav */
+.second-nav {
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-evenly;
+  align-items: center;
+}
+/* Student View */
+.student-view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  min-height: 75%;
+  width: 100%;
+  margin: auto;
+}
+
+.student-view > div {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.student-view h2, .student-view h3, .student-view h4 {
+  color: #333;
+}
+
+.student-view p, .student-view li {
+  color: #666;
+}
+
+/* DOCUMENT Item */
+.assignment-list {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.assignment {
+  height: 3rem;
+  width: 100%;
+  display: grid;
+  grid-template-areas: "title button delete";
+  grid-template-columns: auto auto auto;
+  align-items: center;
+  align-content: center;
+  padding: 3px;
+  background-color: #D0E8F2;
+}
+
+.assignment:nth-child(2n) {
+  background-color: #b7c7c5;
+}
+
+
+/* DOCUMENT Name */
+.assignment-title {
+  grid-area: title;
+  font-size: 1.8rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  text-decoration: none;
+  color: #5D737E;
+  margin-left: .3rem;
+}
+.assignment-title:hover {
+  color: #aaa;
+}
+.date-assigned {
+  grid-area: assignment;
+  font-size: 1.2rem;
+  justify-self: end;
+  margin-right: 12px;
+  color: #5D737E;
+}
+.complete > .assignment-title{
+  color: #5D737E;
+  text-decoration: line-through #5D737E;
+}
+
+/* Button */
+.complete-button {
+  grid-area: button;
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 50%;
+  border: 2px solid #5D737E;
+  background-color: #F4F4F4;
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+.complete-button.completed{
+  background-color: #5D737E;
+}
+
+
+
+/* DOCUMENT Assignment */
+.assign-user {
+  grid-area: assignment;
+  width: fit-content;
+  font-family: "Roboto", sans-serif;
+  font-size: 1.2rem;
+  color: #5D737E;
+  border: none;
+  border-radius: 5px;
+  background-color: inherit;
+  padding: 5px;
+  cursor: pointer;
+}
+.assign-user:focus {
+  outline: none;
+  border-color: #5D737E;
+}
+
+/* Delete Button */
+.delete-button {
+  grid-area: delete;
+  justify-self: end;
+  margin-right: 5px;
+  font-size: 1rem;
+  color: #5D737E;
+  cursor: pointer;
+}
+
+/* Modal */
+.modal {
+  grid-area: main;
+  display: none;
+  position: fixed;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  display: block;
+  margin: 15% auto;
+  padding: 10px;
+  border: 1px solid #888;
+  border-radius: 5px;
+  height: 30rem;
+  width: 30rem;
+}
+
+.modal-content .header {
+  height: auto;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.8rem;
+  font-weight: 400;
+}
+.break-thin {
+  border-bottom: 1px solid #aaa;
+  width: 100%;
+  margin: 10px 0;
+}
+.modal-content .header i {
+  font-size: 2rem;
+}
+
+/* Modal Form */
+
+.modal-content form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 85%;
+  font-size: 1.6rem;
+}
+
+.modal-content form * {
+  width: 100%;
+  margin: 5px 0;
+}
+
+
+.modal-content form input[type="submit"] {
+  margin-top: auto;
+  height: 3rem;
+}
+/* #viewStudentModal input[type="submit"] {
+  display: none;
+} */
+
+
+.close {
+  color: #aaa;
+  margin-left: auto;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+/* Upload Button */
+
+.btn1 {
+  width: auto;
+  font-size: 1.8rem;
+  font-family: "Roboto", sans-serif;
+  border: 2px solid #5D737E;
+  border-radius: 5px;
+  background-color: #D0E8F2;
+  padding: 1rem;
+  margin-bottom: 10rem;
+}
+
+.btn1 :hover {
+  background-color: #5D737E;
+  border-color: #786F78;
+  cursor: pointer;
+}
+
+/******* FOOTER *******/
+footer {
+  width: 100%;
+  max-width: 40rem;
+  grid-area: footer;
+  align-self: center;
+  justify-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: .5rem 0;
+  position: fixed;
+  bottom: 0;
+  font-family: "Roboto", sans-serif;
+  box-sizing: border-box;
+}
+  footer a {
+      height: 100%;
+      border: 2px solid #333333;
+      border-radius: 5px;
+      font-size: 1.6rem;
+      padding: 3px;
+      color:#F4F4F4;
+      background-color: #5D737E;
+      text-decoration: none;
+  }
+  footer a:hover {
+      background-color: #5D737E;
+      border-color: #786F78;
+      cursor: pointer;
+  }

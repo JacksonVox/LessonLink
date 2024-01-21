@@ -19,22 +19,12 @@
     <h1>LessonLink</h1>
   </header>
 
-  <nav>
-    <ul>
-      <li><a href="/documents">Documents</a></li>
-      <li><a href="/students">Students</a></li>
-    </ul>
-  </nav>
   
   <main>
-    <div class="second-nav">
-      <a href="/students">Return to all Students</a>
-      <a href="/studentHome/<%= student._id %>">Invite this student!</a>
-    </div>
 
     <div class="student-view">
       
-        <h3 class="student-name"><%= student.userName %></h3>
+        <h3 class="student-name">Welcome <%= student.userName %>!</h3>
       
       <div>
         <h4>Notes:</h4>
@@ -43,24 +33,13 @@
 
       <div>
         <h3>Assignments:</h3>
-        <form action="/students/assignDocument" method="POST">
-          <select name="document">
-            <option value="">Add Assignment</option>
-            <% documents.forEach(function(document) { %>
-              <option value="<%= document._id %>"><%= document.title %></option>
-            <% }); %>
-          </select>
-          <input type="hidden" name="studentId" value="<%= student._id %>">
-          <input type="submit" value="Add">
-        </form>
+
 
         <ul class="assignment-list">
           <% student.assignments.reverse().forEach(function(assignment) { %>
             <% let document = documents.find(el => el._id.toString() === assignment.toString()); %>
               <li class="assignment <%= student.assignmentsCompleted.includes(document._id) ? 'complete' : 'incomplete' %>" data-id="<%= document._id %>" data-student-id="<%= student._id %>">
                 <a href=<%= document["file"] %> target="_blank" class='assignment-title'><%= document["title"]%></a>
-                <input type="checkbox" class="markCompleteCheckbox" <%= student.assignmentsCompleted.includes(document._id) ? 'checked' : '' %>>
-                <span class='delete-button fas fa-trash-alt'></span>
               </li>
           <% }); %>
         </ul>

@@ -131,11 +131,6 @@ exports.postAddStudent = (req, res) => {
     if (err) {
       return next(err);
     }
-    req.logIn(student, (err) => {
-      if (err) {
-        return next(err);
-      }
-      res.redirect("/students/viewStudent/" + student._id);
-    });
+    res.redirect("/students/viewStudent/" + student._id);
   });
 };

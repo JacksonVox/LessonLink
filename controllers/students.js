@@ -10,8 +10,6 @@ module.exports = {
     try {
       let students = await Student.find({ teacherId: req.user.teacherId }).sort({ userName: 1 });
       let documents = await Document.find({ teacherId: req.user.teacherId });
-      // check student data
-      console.log(students);
       const adminTeacher = await Teacher.findById(req.user.teacherId);
       res.render("students.ejs", {
         students: students,
@@ -28,8 +26,6 @@ module.exports = {
     try {
       let student = await Student.findOne({ _id: req.params.studentId });
       let documents = await Document.find({ teacherId: req.user.teacherId });
-      // check student data
-      console.log(student);
       res.render("viewStudent.ejs", {
         student: student,
         user: req.user,
