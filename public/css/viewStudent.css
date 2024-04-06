@@ -3,13 +3,11 @@ html {
   font-size: 62.5%; /*1 rem = 10 px */
 }
 
-
 /*********** BODY *************/
-
 
 body {
   display: grid;
-  grid-template-areas: 
+  grid-template-areas:
     "header"
     "nav"
     "main"
@@ -20,7 +18,7 @@ body {
   margin: auto;
   font-size: 2rem;
   color: #333333;
-  background-color: #F4F4F4;
+  background-color: #f4f4f4;
 }
 
 body * {
@@ -37,10 +35,10 @@ header {
 }
 header h1 {
   font-size: 4rem;
-  font-family: "Roboto", sans-serif;
+
   font-weight: 500;
   font-style: italic;
-  color: #64B6AC;
+  color: #64b6ac;
 }
 
 /******* NAV *******/
@@ -53,23 +51,23 @@ nav {
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-evenly;
-  background-color: #F4F4F4; /* Background color */
+  background-color: #f4f4f4; /* Background color */
   padding: 10px 0;
   margin: 20px 0;
 }
 
 nav a {
-  color: #5D737E; /* Primary color */
+  color: #5d737e; /* Primary color */
   text-decoration: none;
   font-size: 2.5rem; /* Increased font size */
-  font-family: "Roboto", sans-serif;
+
   font-weight: 500;
   margin: 0 20px;
   transition: color 0.3s ease;
 }
 
 nav a:hover {
-  color: #64B6AC; /* Secondary color */
+  color: #64b6ac; /* Secondary color */
 }
 
 /******* MAIN *******/
@@ -83,7 +81,7 @@ main {
   flex-flow: column nowrap;
   align-items: center;
   justify-content: space-between;
-  font-family: "Roboto", sans-serif;
+
   font-weight: 300;
 }
 
@@ -116,11 +114,14 @@ main {
   gap: 10px;
 }
 
-.student-view h2, .student-view h3, .student-view h4 {
+.student-view h2,
+.student-view h3,
+.student-view h4 {
   color: #333;
 }
 
-.student-view p, .student-view li {
+.student-view p,
+.student-view li {
   color: #666;
 }
 
@@ -139,13 +140,12 @@ main {
   align-items: center;
   align-content: center;
   padding: 3px;
-  background-color: #D0E8F2;
+  background-color: #d0e8f2;
 }
 
 .assignment:nth-child(2n) {
   background-color: #b7c7c5;
 }
-
 
 /* DOCUMENT Name */
 .assignment-title {
@@ -155,8 +155,8 @@ main {
   text-overflow: ellipsis;
   white-space: nowrap;
   text-decoration: none;
-  color: #5D737E;
-  margin-left: .3rem;
+  color: #5d737e;
+  margin-left: 0.3rem;
 }
 .assignment-title:hover {
   color: #aaa;
@@ -166,11 +166,11 @@ main {
   font-size: 1.2rem;
   justify-self: end;
   margin-right: 12px;
-  color: #5D737E;
+  color: #5d737e;
 }
-.complete > .assignment-title{
-  color: #5D737E;
-  text-decoration: line-through #5D737E;
+.complete > .assignment-title {
+  color: #5d737e;
+  text-decoration: line-through #5d737e;
 }
 
 /* Button */
@@ -179,25 +179,23 @@ main {
   width: 1.8rem;
   height: 1.8rem;
   border-radius: 50%;
-  border: 2px solid #5D737E;
-  background-color: #F4F4F4;
+  border: 2px solid #5d737e;
+  background-color: #f4f4f4;
   margin-right: 8px;
   cursor: pointer;
 }
 
-.complete-button.completed{
-  background-color: #5D737E;
+.complete-button.completed {
+  background-color: #5d737e;
 }
-
-
 
 /* DOCUMENT Assignment */
 .assign-user {
   grid-area: assignment;
   width: fit-content;
-  font-family: "Roboto", sans-serif;
+
   font-size: 1.2rem;
-  color: #5D737E;
+  color: #5d737e;
   border: none;
   border-radius: 5px;
   background-color: inherit;
@@ -206,7 +204,7 @@ main {
 }
 .assign-user:focus {
   outline: none;
-  border-color: #5D737E;
+  border-color: #5d737e;
 }
 
 /* Delete Button */
@@ -215,7 +213,7 @@ main {
   justify-self: end;
   margin-right: 5px;
   font-size: 1rem;
-  color: #5D737E;
+  color: #5d737e;
   cursor: pointer;
 }
 
@@ -232,7 +230,7 @@ main {
   width: 100%;
   height: 100%;
   overflow: auto;
-  background-color: rgba(0,0,0,0.4);
+  background-color: rgba(0, 0, 0, 0.4);
 }
 
 .modal-content {
@@ -279,7 +277,6 @@ main {
   margin: 5px 0;
 }
 
-
 .modal-content form input[type="submit"] {
   margin-top: auto;
   height: 3rem;
@@ -287,7 +284,6 @@ main {
 /* #viewStudentModal input[type="submit"] {
   display: none;
 } */
-
 
 .close {
   color: #aaa;
@@ -303,23 +299,22 @@ main {
   cursor: pointer;
 }
 
-
 /* Upload Button */
 
 .btn1 {
   width: auto;
   font-size: 1.8rem;
-  font-family: "Roboto", sans-serif;
-  border: 2px solid #5D737E;
+
+  border: 2px solid #5d737e;
   border-radius: 5px;
-  background-color: #D0E8F2;
+  background-color: #d0e8f2;
   padding: 1rem;
   margin-bottom: 10rem;
 }
 
 .btn1 :hover {
-  background-color: #5D737E;
-  border-color: #786F78;
+  background-color: #5d737e;
+  border-color: #786f78;
   cursor: pointer;
 }
 
@@ -333,24 +328,24 @@ footer {
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  margin: .5rem 0;
+  margin: 0.5rem 0;
   position: fixed;
   bottom: 0;
-  font-family: "Roboto", sans-serif;
+
   box-sizing: border-box;
 }
-  footer a {
-      height: 100%;
-      border: 2px solid #333333;
-      border-radius: 5px;
-      font-size: 1.6rem;
-      padding: 3px;
-      color:#F4F4F4;
-      background-color: #5D737E;
-      text-decoration: none;
-  }
-  footer a:hover {
-      background-color: #5D737E;
-      border-color: #786F78;
-      cursor: pointer;
-  }
+footer a {
+  height: 100%;
+  border: 2px solid #333333;
+  border-radius: 5px;
+  font-size: 1.6rem;
+  padding: 3px;
+  color: #f4f4f4;
+  background-color: #5d737e;
+  text-decoration: none;
+}
+footer a:hover {
+  background-color: #5d737e;
+  border-color: #786f78;
+  cursor: pointer;
+}
