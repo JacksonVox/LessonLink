@@ -1,5 +1,5 @@
 /* Font Setup */
-@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;900&display=swap');
 
 html {
   font-size: 62.5%; /*1 rem = 10 px */
@@ -13,12 +13,12 @@ input, textarea, button, select {
 
 body {
   display: grid;
+  height: 100vh;
+  grid-template-rows: 20% auto 10%;
   grid-template-areas:
     "header"
     "main"
     "footer";
-  grid-template-rows: auto 1fr auto;
-  height: 100vh;
   max-width: 400px;
   margin: auto;
   font-size: 2rem;
@@ -26,54 +26,37 @@ body {
   background-color: #f6f5f4;
 }
 
-body * {
-  display: inline-block;
-  box-sizing: border-box;
-}
-
 /******* HEADER *******/
-header {
+
+#logo-header {
   grid-area: header;
   align-self: center;
   justify-self: center;
   margin: 20px 0;
 }
-header h1 {
-  font-size: 4rem;
-
-  font-weight: 500;
-  font-style: italic;
-  color: #64b6ac;
-  text-decoration: underline overline #5d737e;
-}
 
 /******* MAIN *******/
 
 main {
+  grid-area: main;
+  width: auto;
+  margin: 0 10%;
+}
+
+#main-landing {
   display: flex;
   flex-flow: column nowrap;
   align-items: center;
+  justify-content: space-between;
 }
-main > * {
+
+#logo-main {
+  grid-area: main;
   width: 100%;
-  text-align: center;
+  margin-top: 30%;
+  align-self: center;
+  justify-self: center;
 }
-
-main h2 {
-  margin: 40px 0;
-}
-
-main h2 {
-  font-size: 2.2rem;
-}
-
-main p {
-  width: 80%;
-  font-size: 1.8rem;
-  text-align: center;
-  margin: 0 20px;
-}
-
 /******* FORM *******/
 
 form {
@@ -142,19 +125,24 @@ footer {
 .btns {
   display: flex;
   align-items: center;
+  flex-flow: column nowrap;
   justify-content: space-evenly;
+  font-weight: 500;
+  margin-top: auto;
+  margin-bottom: 20%;
 }
 
 .btn-1 {
-  height: 40px;
-  width: 80px;
+  height: 50px;
+  width: 200px;
   margin: 1rem;
+  box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
   border: 2px solid #333333;
-  border-radius: 5px;
-  background-color: #d0e8f2;
+  border-radius: 9px;
+  background-color: #F4A424;
   color: #333333;
   font-size: 1.8rem;
   padding: 3px;
@@ -163,26 +151,27 @@ footer {
 .btn-1:hover {
   color: #5d737e;
 }
-
 .btn-2 {
-  height: 40px;
-  width: 80px;
+  height: 50px;
+  width: 200px;
   margin: 1rem;
+  box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
   border: 2px solid #333333;
-  border-radius: 5px;
-  background-color: #d0e8f2;
+  border-radius: 9px;
+  background-color: #D9D9D9;
+  color: #333333;
   font-size: 1.8rem;
   padding: 3px;
-  color: #f4f4f4;
-  background-color: #5d737e;
   text-decoration: none;
-  padding: 3px;
-  text-decoration: none;
-  text-align: center;
 }
+.btn-2:hover {
+  color: #5d737e;
+}
+
+
 
 .form-full {
   height: auto;
