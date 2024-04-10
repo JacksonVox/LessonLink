@@ -22,13 +22,13 @@
         <h1 class="form-title">Teacher Sign Up</h1>
         <form action="/signup" method="POST">
             <h2>Name</h2>
-            <input type="text" name="userName" placeholder="Jane Smith">
+            <input type="text" name="userName" placeholder="Jane Smith" autocomplete="username">
             <h2>Email</h2>
-            <input type="email" name="email" placeholder="janesmith@aol.com">
+            <input type="email" name="email" placeholder="janesmith@aol.com" autocomplete="email">
             <h2>Password</h2>
-            <input type="password" name="password" placeholder="•••••••••">
+            <input type="password" name="password" placeholder="•••••••••" autocomplete="new-password">
             <h2>Confirm Password</h2>
-            <input type="password" name="confirmPassword" placeholder="•••••••••">
+            <input type="password" name="confirmPassword" placeholder="•••••••••" autocomplete="new-password">
         </form>
         <button class="btn-1" type="submit">Join</button>
     </div>
@@ -40,4 +40,5 @@
     </main>
 
 </body>
+<script src="/js/auth.js"></script>
 </html>
