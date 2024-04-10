@@ -9,9 +9,7 @@
     <title>Document</title>
 </head>
 <body>
-    <header>
-        <h1>LessonLink</h1>
-    </header>
+    <img id="logo-header" src="/images/logo-no-background.png" alt="LessonLink Logo">
     <main>
         
     <% if (locals.messages.errors) { %>
@@ -24,17 +22,23 @@
             <div class="alert alert-danger"><%= el.msg %></div>
         <% }) %>    
     <% } %>
-    <form class="form-full" action="/login" method="POST">
-        <input type="email" name="email" placeholder="Email">
-        <input type="password" name="password" placeholder="Password">
-        <input class="btn-1" type="submit">
-    </form>
+    <div class="form-full flex-col">
+        <h1 class="form-title">Teacher Login</h1>
+        <form action="/login" method="POST">
+            <h2>Email</h2>
+            <input type="email" name="email" placeholder="janesmith@aol.com">
+            <h2>Password</h2>
+            <input type="password" name="password" placeholder="•••••••••">
+        </form>
+        <button class="btn-1" type="submit">Login</button>
+    </div>
 
-    <div class="flex-col">
+    <div class="flex-end">
         <span>Don't have an account?</span>
         <a class="btn-2" href="/signup">Sign Up</a>
     </div>
 
     </main>
 </body>
+<script src="/js/auth.js"></script>
 </html>

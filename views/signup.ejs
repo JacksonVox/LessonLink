@@ -9,24 +9,34 @@
     <title>Document</title>
 </head>
 <body>
-    <header>
-        <h1>LessonLink</h1>
-    </header>
-
+    <img id="logo-header" src="/images/logo-no-background.png" alt="LessonLink Logo">
     <main>
+
     <% if (locals.messages.errors) { %>
         <% messages.errors.forEach( el => { %>
             <div class="alert alert-danger"><%= el.msg %></div>
         <% }) %>    
     <% } %>
 
-    <form class="form-full" action="/signup" method="POST">
-        <input type="text" name="userName" placeholder="Teacher Name">
-        <input type="email" name="email" placeholder="Email">
-        <input type="password" name="password" placeholder="Password">
-        <input type="password" name="confirmPassword" placeholder="Confirm Password">
-        <input class="btn-1" type="submit">
-    </form>
+    <div class="form-full flex-col">
+        <h1 class="form-title">Teacher Sign Up</h1>
+        <form action="/signup" method="POST">
+            <h2>Name</h2>
+            <input type="text" name="userName" placeholder="Jane Smith">
+            <h2>Email</h2>
+            <input type="email" name="email" placeholder="janesmith@aol.com">
+            <h2>Password</h2>
+            <input type="password" name="password" placeholder="•••••••••">
+            <h2>Confirm Password</h2>
+            <input type="password" name="confirmPassword" placeholder="•••••••••">
+        </form>
+        <button class="btn-1" type="submit">Join</button>
+    </div>
+
+    <div class="flex-end flex-col">
+        <span>Already have an account?</span>
+        <a class="btn-2" href="/login">Login</a>
+    </div>
     </main>
 
 </body>

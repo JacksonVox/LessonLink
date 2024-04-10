@@ -14,7 +14,7 @@ input, textarea, button, select {
 body {
   display: grid;
   height: 100vh;
-  grid-template-rows: 20% auto 10%;
+  grid-template-rows: 15% auto 10%;
   grid-template-areas:
     "header"
     "main"
@@ -33,6 +33,7 @@ body {
   align-self: center;
   justify-self: center;
   margin: 20px 0;
+  width: 60%;
 }
 
 /******* MAIN *******/
@@ -41,6 +42,9 @@ main {
   grid-area: main;
   width: auto;
   margin: 0 10%;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
 }
 
 #main-landing {
@@ -52,29 +56,42 @@ main {
 
 #logo-main {
   grid-area: main;
-  width: 100%;
-  margin-top: 30%;
+  width: 95%;
+  margin-top: 40%;
   align-self: center;
   justify-self: center;
 }
 /******* FORM *******/
 
 form {
+  height: auto;
+  width: 100%;
+  background-color: #FFFFFF;
   display: flex;
-  align-items: center;
-  height: 40px;
-  width: 80%;
-  margin-top: 15px;
+  flex-flow: column nowrap;
+  padding: 10px;
+  margin-bottom: 30px;
+  border-radius: 10px;
+  box-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.05);
 }
 
-form * {
-  height: 95%;
+.form-title {
+  font-size: 2.4rem;
+  margin-bottom: 10px;
+  align-self: baseline;
+}
+
+form > input {
+  height: 30px;
+  margin: 2px 0;
+  width: 100%;
 }
 
 form input {
   width: 100%;
   border: 2px solid #5d737e;
   border-radius: 5px;
+  padding-left: 7px;
 }
 
 form .text {
@@ -95,6 +112,11 @@ form .submit:hover {
   background-color: #64b6ac;
   border-color: #5d737e;
   cursor: pointer;
+}
+
+.form-full {
+  width: 100%;
+  margin-top: 20%;
 }
 
 /******* FORM *******/
@@ -136,7 +158,7 @@ footer {
   height: 50px;
   width: 200px;
   margin: 1rem;
-  box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 12px 0px rgba(0, 0, 12.2, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -155,7 +177,7 @@ footer {
   height: 50px;
   width: 200px;
   margin: 1rem;
-  box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 12px 0px rgba(0, 0, 12.2, 0.1);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -172,28 +194,15 @@ footer {
 }
 
 
-
-.form-full {
-  height: auto;
-  width: 100%;
-  display: flex;
-  flex-flow: column nowrap;
-  padding: 20px;
-}
-.form-full > * {
-  height: 30px;
-  margin: 2px 0;
-  width: 100%;
-}
-.form .btn-1 {
-  width: 100%;
-}
-
 .flex-col {
   display: flex;
   align-items: center;
   flex-flow: column nowrap;
   justify-content: space space-evenly;
+}
+
+.flex-end {
+  margin-top: auto;
 }
 
 .margin-top-bot {
