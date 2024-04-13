@@ -1,7 +1,7 @@
 const addStudentModal = document.getElementById("addStudentModal");
 const viewStudentModal = document.getElementById("viewStudentModal");
 const closeBtn = document.getElementsByClassName("close");
-const addStudentButton = document.getElementById("addStudentButton");
+const addStudentButton = document.getElementById("addItemButton");
 let selectedStudentId = null;
 
 // Close Modals
