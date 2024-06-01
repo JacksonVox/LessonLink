@@ -26,6 +26,8 @@ module.exports = {
     try {
       let student = await Student.findOne({ _id: req.params.studentId });
       let documents = await Document.find({ teacherId: req.user.teacherId });
+      //temporary log
+      console.log(student);
       res.render("viewStudent.ejs", {
         student: student,
         user: req.user,
