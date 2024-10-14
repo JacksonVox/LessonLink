@@ -47,6 +47,14 @@ html {
   width: 53%;
 }
 
+.title-header {
+  grid-area: header;
+  align-self: center;
+  justify-self: center;
+  margin: auto;
+  font-size: 4rem
+}
+
 /******* MAIN *******/
 
 main {
@@ -72,6 +80,15 @@ main {
   align-self: center;
   justify-self: center;
 }
+
+/* Second Nav */
+.second-nav {
+  width: 100%;
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-evenly;
+  align-items: center;
+}
 /******* FORM *******/
 
 form {
@@ -83,7 +100,6 @@ form {
   padding: 10px;
   margin-bottom: 30px;
   border-radius: 10px;
-  box-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.05);
 }
 
 .form-title {
@@ -183,6 +199,10 @@ form .submit:hover {
   width: 100%;
   padding: 10px;
 }
+.list-item .markCompleteCheckbox {
+  margin-left: 0;
+  margin-right: 1rem;
+}
 .item-info {
   height: 35px;
   display: flex;
@@ -274,6 +294,10 @@ nav .icon.current-page {
   border-radius: 5px;
   height: 30rem;
   width: 30rem;
+}
+
+.modal-content form {
+  box-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.05);
 }
 
 .modal-content .header {

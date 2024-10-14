@@ -108,7 +108,7 @@ copyInviteLinkButton.addEventListener("click", copyInviteLink)
 
 function copyInviteLink() {
   event.preventDefault();
-  const inviteLink = document.getElementById("inviteLink").value;
+const inviteLink = document.getElementById("inviteLink").value;
   navigator.clipboard.writeText(inviteLink);
 }
 
