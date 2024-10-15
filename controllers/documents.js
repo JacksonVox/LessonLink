@@ -11,16 +11,11 @@ module.exports = {
       let documentItems = await Document.find({
         teacherId: req.user.teacherId,
       });
-      documentItems = documentItems.sort((a, b) => a.completed - b.completed);
-      const itemsLeft = await Document.countDocuments({
-        assignedToId: req.user.id,
-        completed: false,
-      });
+      documentItems = documentItems.sort((a, b) => b.dateCreated - a.dateCreated);
       const teamTeachers = await Student.find({
         teacherId: req.user.teacherId,
       });
       const adminTeacher = await Teacher.findById(req.user.teacherId);
-      const allTeachers = [adminTeacher, ...teamTeachers];
       res.render("documents.ejs", {
         documents: documentItems,
         user: req.user,
@@ -86,17 +81,18 @@ module.exports = {
     }
   },
   deleteDocument: async (req, res) => {
-    console.log(req.body.documentIdFromJSFile);
     try {
-      let document = await Document.findById({
-        _id: req.body.documentIdFromJSFile,
-      });
-      await cloudinary.uploader.destroy(document.cloudinaryId);
-      await Document.deleteOne({ _id: req.body.documentIdFromJSFile });
-      console.log("Deleted Document");
-      res.json("Deleted It");
-    } catch (err) {
-      console.log(err);
+      const { docId, docCloudId } = req.body;
+
+      if (!docId || !docCloudId) {
+        return res.status(400).json({ message: "Document ID is required" });
+      }
+      await cloudinary.uploader.destroy(docCloudId);
+      await Document.findByIdAndDelete(docId);
+      res.status(200).json({ message: "Document deleted successfully" });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: "Failed to delete document" });
     }
   },
   getTeachersByTeacherId: async (req, res) => {
