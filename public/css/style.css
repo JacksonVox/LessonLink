@@ -88,6 +88,8 @@ main {
   flex-flow: row nowrap;
   justify-content: space-evenly;
   align-items: center;
+  margin-top: auto;
+  margin-bottom: 10px;
 }
 /******* FORM *******/
 
@@ -98,7 +100,6 @@ form {
   display: flex;
   flex-flow: column nowrap;
   padding: 10px;
-  margin-bottom: 30px;
   border-radius: 10px;
 }
 
@@ -151,6 +152,35 @@ form .submit:hover {
   margin-top: 5%;
 }
 
+/* Notes */
+.notes-container {
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.notes-container .title {
+  width: 100%;
+  font-size: 1.6rem;
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: left;
+  margin-bottom: 5px;
+}
+
+.notes-container .notes {
+  width: 100%;
+  min-height: 4rem;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 1.4rem;
+  background-color: #dddddd;
+  box-shadow: 0px 4px 15px 0px rgba(0, 0, 0, 0.05);
+}
+
 /* List */
 .list-header {
   background-color: #f6f5f4;
@@ -159,8 +189,8 @@ form .submit:hover {
   align-items: center;
   justify-content: space-between;
   width: 100%;
-  position: sticky;
   top: 0;
+  margin-bottom: 1rem;
 }
 .list-header .icon {
   width: 30px;
@@ -200,19 +230,24 @@ form .submit:hover {
   padding: 10px;
 }
 .list-item .markCompleteCheckbox {
+  height: 2rem;
+  width: 2rem;
   margin-left: 0;
   margin-right: 1rem;
 }
 .item-info {
-  height: 35px;
+  height: 100%;
   display: flex;
   flex-flow: column nowrap;
-  justify-content: space-between;
+  justify-content: center;
 }
 .item-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-size: 2rem;
   font-weight: 500;
-  margin-left: 10px;
+  flex: 1 1 auto;
 }
 .date-assigned {
   font-size: 1rem;
@@ -268,6 +303,24 @@ nav .icon.current-page {
   color: #5d737e;
 }
 
+.assignment-list > form {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: space-between;
+}
+
+.assignment-list > form > select {
+  width: 75%;
+  flex: 2 2 1;
+  background-color:#f6f5f4;
+  border: none;
+  border-radius: 8px;
+  padding: 0 .5rem;
+}
+.assignment-list > form > input {
+  width: 20%;
+  flex: 2 1 1;
+}
 
 /* Modal */
 .modal {
@@ -416,6 +469,11 @@ nav .icon.current-page {
 }
 .btn-small-text:hover {
   color: #5d737e;
+}
+
+.complete > * > .item-title {
+  color: #5D737E;
+  text-decoration: line-through #5D737E;
 }
 
 .close {

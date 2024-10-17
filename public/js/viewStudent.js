@@ -13,8 +13,8 @@ function openInviteModal() {
 }
 
 function routeUnassignDocument(event) {
-  const assignmentId = event.target.parentElement.getAttribute("data-id");
-  const studentId = event.target.parentElement.getAttribute("data-student-id");
+  const assignmentId = event.target.getAttribute("data-doc-id");
+  const studentId = event.target.getAttribute("data-student-id");
   console.log(studentId);
 
   fetch(`/students/unassignDocument`, {
@@ -76,16 +76,46 @@ function routeMarkIncomplete(event) {
     .catch((error) => console.error(error));
 }
 
-// Assignment List Listener
-assignmentList.addEventListener("click", function (event) {
-  if (event.target.matches(".delete-button")) {
-    routeUnassignDocument(event);
-  } else if (event.target.matches(".incomplete > .markCompleteCheckbox")) {
-    routeMarkComplete(event);
-  } else if (event.target.matches(".complete > .markCompleteCheckbox")) {
-    routeMarkIncomplete(event);
+
+
+// Close Modal
+document.onclick = function (event) {
+  if (
+    event.target.matches("#inviteStudentModal") ||
+    event.target.matches(".close")
+  ) {
+    inviteStudentModal.style.display = "none";
   }
-});
+};
+
+// View Document Modal
+const viewDocModal = document.getElementById("viewDocModal");
+const viewDocCloseBtn = document.getElementsByClassName("close")[1];
+const deleteDocBtn = document.getElementById("delete-document")
+const openDocBtn = document.getElementById("open-document")
+
+viewDocCloseBtn.onclick = function() {
+  viewDocModal.style.display = "none";
+}
+
+window.onclick = function(event) {
+  if (event.target == viewDocModal) {
+    viewDocModal.style.display = "none";
+  }
+}
+
+function openViewDocModal(title, description, fileUrl, previewUrl, docId, docCloudId, studentId) {
+  document.getElementById("docTitle").innerText = title;
+  document.getElementById("docDescription").innerText = description;
+  document.getElementById("docFile").src = previewUrl;
+  deleteDocBtn.setAttribute("data-doc-id", docId);
+  deleteDocBtn.setAttribute("data-student-id", studentId);
+  deleteDocBtn.setAttribute("data-doc-cloud-id", docCloudId);
+  openDocBtn.href = fileUrl;
+  viewDocModal.style.display = "flex";
+}
+
+//Event Listeners
 
 // Invite Student Listener
 openInviteStudentModal.addEventListener("click", function (event) {
@@ -112,12 +142,31 @@ const inviteLink = document.getElementById("inviteLink").value;
   navigator.clipboard.writeText(inviteLink);
 }
 
-// Close Modal
-document.onclick = function (event) {
-  if (
-    event.target.matches("#inviteStudentModal") ||
-    event.target.matches(".close")
-  ) {
-    inviteStudentModal.style.display = "none";
+// Assignment List Listener
+assignmentList.addEventListener("click", (event) => {
+
+  if (event.target.matches(".incomplete > .markCompleteCheckbox")) {
+    routeMarkComplete(event);
+    return;
+  } else if (event.target.matches(".complete > .markCompleteCheckbox")) {
+    routeMarkIncomplete(event);
+    return;
   }
-};
+
+  const listItem = event.target.closest('.list-item')
+  if (listItem) {
+    const title = listItem.getAttribute("data-title");
+    const description = listItem.getAttribute("data-description");
+    const fileUrl = listItem.getAttribute("data-file-url");
+    const previewUrl = `https://res.cloudinary.com/dxxfdmsh3/image/upload/t_pdf-to-jpg/${listItem.getAttribute("cloudinary-id")}`;
+    const docCloudId = listItem.getAttribute("cloudinary-id");
+    const docId = listItem.getAttribute("data-id")
+    const studentId = listItem.getAttribute("data-student-id")
+    openViewDocModal(title, description, fileUrl, previewUrl, docId, docCloudId, studentId);
+  }
+});
+
+deleteDocBtn.addEventListener("click", (event) => {
+  const confirmed = confirm("Remove this assignment from this student?")
+  if (confirmed) { routeUnassignDocument(event) }
+});

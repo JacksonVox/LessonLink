@@ -43,15 +43,15 @@ function openViewDocModal(title, description, fileUrl, previewUrl, docId, docClo
   document.getElementById("docTitle").innerText = title;
   document.getElementById("docDescription").innerText = description;
   document.getElementById("docFile").src = previewUrl;
-  deleteDocBtn.setAttribute("doc-id", docId);
-  deleteDocBtn.setAttribute("doc-cloud-id", docCloudId);
+  deleteDocBtn.setAttribute("data-doc-id", docId);
+  deleteDocBtn.setAttribute("data-doc-cloud-id", docCloudId);
   openDocBtn.href = fileUrl;
   viewDocModal.style.display = "flex";
 }
 
 async function deleteDocument() {
-  const docId = deleteDocBtn.getAttribute("doc-id");
-  const docCloudId = deleteDocBtn.getAttribute("doc-cloud-id")
+  const docId = deleteDocBtn.getAttribute("data-doc-id");
+  const docCloudId = deleteDocBtn.getAttribute("data-doc-cloud-id")
 
   const confirmed = confirm("Are you sure you want to delete this document? This cannot be undone.")
   if (!confirmed) {

@@ -21,16 +21,16 @@
   
   <main>
     
-    <div>
-      <h4 class="list-header">Notes:</h4>
-      <p class="list"><%= student.note %></p>
+    <div class="notes-container">
+      <h4 class="title">Notes:</h4>
+      <p class="notes"><%= student.note %></p>
     </div>
 
     <div class="list-header">
       <h1>Assignments</h1>
     </div>
 
-      <ul class="student-grid list">
+      <ul class="assignment-list list">
         <form action="/students/assignDocument" method="POST">
           <select name="document">
             <option value="">Add Assignment</option>
@@ -43,13 +43,24 @@
         </form>
 
           <% console.log(student.assignments) %>
-          <% if (student.assignments.length > 1) { %>
+          <% if (student.assignments.length >= 1) { %>
             <% student.assignments.reverse().forEach(function(assignment) { %>
               <% let document = documents.find(el => el._id.toString() === assignment.toString()); %>
-                <li class="list-item <%= student.assignmentsCompleted.includes(document._id) ? 'complete' : 'incomplete' %>" data-id="<%= document._id %>" data-student-id="<%= student._id %>">
+                <li class="list-item 
+                <%= student.assignmentsCompleted.includes(document._id) ? 'complete' : 'incomplete' %>" 
+                data-id="<%= document._id %>" 
+                data-student-id="<%= student._id %>"
+                data-title="<%= document.title %>"
+                data-description="<%= document.description %>" 
+                data-file-url="<%= document.file %>" 
+                cloudinary-id="<%= document.cloudinaryId %>"
+                >
                   <input type="checkbox" class="markCompleteCheckbox" <%= student.assignmentsCompleted.includes(document._id) ? 'checked' : '' %>>
-                  <a href=<%= document["file"] %> target="_blank" class='assignment-title'><%= document["title"]%></a>
-                  <span class='delete-button fas fa-trash-alt icon item-expand'></span>
+                  <div class="item-info">
+                    <h3 class='item-title'>
+                      <%= document["title"]%>
+                    </h3>
+                  </div>
                 </li>
             <% }); %>
           <% } %>
@@ -76,6 +87,24 @@
       <a href="/students">Return to all Students</a>
     </div>
   
+    <div id="viewDocModal" class="modal">
+      <div class="modal-content">
+        <div class="header">
+          <h2 id="docTitle"></h2>
+          <i class="close fa-regular fa-circle-xmark"></i>
+        </div>
+        <div class="break-thin"></div>
+        <div class="document-content">
+          <p id="docDescription" class="document-description"></p>
+          <img id="docFile" src=""></img>
+          <div class="document-controls">
+            <a href="" id="open-document" class="btn-small-text" target="_blank">Open</a>
+            <button type='button' id='delete-document' class='delete fas fa-trash-alt icon'></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </main>
 
 
