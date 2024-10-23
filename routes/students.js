@@ -9,6 +9,7 @@ const { ensureAuth, ensureTeacher } = require("../middleware/auth");
 router.get("/", ensureAuth, ensureTeacher, studentsController.getStudents);
 
 router.get("/viewStudent/:studentId", ensureTeacher, studentsController.getViewStudent);
+router.put("/editStudent", ensureTeacher, studentsController.putEditStudent);
 
 router.post("/assignDocument", ensureTeacher, studentsController.putAssignDocument);
 router.put("/unassignDocument", ensureTeacher, studentsController.putUnassignDocument);

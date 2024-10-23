@@ -17,7 +17,6 @@
 <body>
   <h1 class="title-header"><%= student.userName %></h1>
 
-  <svg xmlns="http://www.w3.org/2000/svg" data-student-id="<%= student._id %>" class="btn-2" id="openInviteStudentModal" viewBox="0 0 512 512"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M256 112v288M400 256H112"/></svg>
   
   <main>
     
@@ -77,15 +76,12 @@
         </div>
         <div class="break-thin"></div>
         <form>
-          <input type="text" id="inviteLink" value="http://localhost:2121/studentHome/<%= student._id %>" >
+          <input type="text" id="inviteLink" value="http://localhost:2121/studentHome/<%= student._id %>" readonly>
           <button id="copyInviteLink">Copy Link</button>
         </form>
       </div>
     </div>
 
-    <div class="second-nav">
-      <a href="/students">Return to all Students</a>
-    </div>
   
     <div id="viewDocModal" class="modal">
       <div class="modal-content">
@@ -97,12 +93,35 @@
         <div class="document-content">
           <p id="docDescription" class="document-description"></p>
           <img id="docFile" src=""></img>
-          <div class="document-controls">
+          <div class="modal-lower-controls">
             <a href="" id="open-document" class="btn-small-text" target="_blank">Open</a>
             <button type='button' id='delete-document' class='delete fas fa-trash-alt icon'></button>
           </div>
         </div>
       </div>
+    </div>
+
+    <div id="editStudentModal" class="modal">
+      <div class="modal-content">
+        <div class="header">
+          <h2>Edit Student</h2>
+          <i class="close fa-regular fa-circle-xmark"></i>
+        </div>
+        <div class="break-thin"></div>
+        <input id="new-name"><%= student.userName %></input>
+        <textarea name="" id="new-note"><%= student.note %></textarea>
+        <div class="modal-lower-controls">
+          <div id="save-changes" class="btn-small-text">Open</div>
+          <button type='button' id='delete-student' class='delete fas fa-trash-alt icon'></button>
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="second-nav">
+      <button class="btn-2" id="openEditStudentModal">Edit</button>
+      <button class="btn-1" id="openInviteStudentModal">Invite</button>
+      <a href="/students">Return to all Students</a>
     </div>
 
   </main>

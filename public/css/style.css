@@ -388,7 +388,7 @@ nav .icon.current-page {
   width: 100%;
 }
 
-.document-controls {
+.modal-lower-controls {
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;

@@ -10,7 +10,5 @@ router.post('/createDocument', ensureTeacher, upload.single("file"), documentsCo
 
 router.delete('/deleteDocument', ensureTeacher, documentsController.deleteDocument);
 
-router.get('/getTeachersByTeacherId', ensureTeacher, documentsController.getTeachersByTeacherId);
-
 
 module.exports = router;

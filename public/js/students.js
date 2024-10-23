@@ -35,5 +35,3 @@ studentGrid.addEventListener('click', (event) => {
     window.location.href = `/students/viewStudent/${studentId}`;
   }
 });
-
-//Student List Listeners

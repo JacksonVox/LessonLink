@@ -95,24 +95,4 @@ module.exports = {
       res.status(500).json({ message: "Failed to delete document" });
     }
   },
-  getTeachersByTeacherId: async (req, res) => {
-    try {
-      const userTeam = await Student.find({ teacherId: req.user.teacherId });
-      res.json(userTeam);
-    } catch (err) {
-      console.error(err);
-      res.status(500).send("Server Error");
-    }
-  },
-  assignDocument: async (req, res) => {
-    try {
-      await Document.findByIdAndUpdate(req.params.documentId, {
-        assignedToId: req.params.userId,
-      });
-      res.json({ status: "OK" });
-    } catch (err) {
-      console.error(err);
-      res.status(500).send("Server Error");
-    }
-  },
 };

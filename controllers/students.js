@@ -37,6 +37,20 @@ module.exports = {
       console.log(err);
     }
   },
+  putEditStudent: async (req, res) => {
+    try {
+      const student = await Student.findById(req.body.studentId);
+      if (student.userName === req.body.studentName && student.note === req.body.studentNote){
+        res.redirect("/students/viewStudent/" + student._id)
+      } else if (req.body.studentName !== null){
+      student.userName = req.body.studentName;
+      student.note = req.body.studentNote;
+      student.save();
+      res.redirect("/students/viewStudent/" + student._id)
+      }} catch (err) {
+      console.log(err);
+    }
+  },
   putAssignDocument: async (req, res) => {
     try {
       const student = await Student.findById(req.body.studentId);

@@ -1,9 +1,6 @@
 const assignmentList = document.querySelector(".assignment-list");
-const openInviteStudentModal = document.getElementById(
-  "openInviteStudentModal"
-);
-const inviteStudentModal = document.getElementById("inviteStudentModal");
-const copyInviteLinkButton = document.getElementById("copyInviteLink");
+const openInviteStudentModal = document.getElementById("openInviteStudentModal");
+const openEditStudentModal = document.getElementById("openEditStudentModal")
 
 // Functions
 
@@ -133,14 +130,43 @@ openInviteStudentModal.addEventListener("click", function (event) {
     openInviteModal();
   }
 });
-// Copy Invite link button listener
-copyInviteLinkButton.addEventListener("click", copyInviteLink)
 
-function copyInviteLink() {
+openEditStudentModal.addEventListener("click", () => {
+  const studentName = document.getElementById("new-name").innerText
+  const studentNote = document.getElementById("new-note").innerText
+
+  fetch(`/students/editStudent`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ studentName, studentNote }),
+  })
+    .then((response) => {
+      if (response.ok) {
+        location.reload();
+      } else {
+        console.error("Failed to update student info");
+      }
+    })
+    .catch((error) => console.error(error));
+})
+
+// Copy Invite link button listener
+const copyInviteLinkButton = document.getElementById("copyInviteLink");
+const inviteLinkInput = document.getElementById("inviteLink");
+
+copyInviteLinkButton.addEventListener("click", function(event) {
   event.preventDefault();
-const inviteLink = document.getElementById("inviteLink").value;
-  navigator.clipboard.writeText(inviteLink);
-}
+
+  inviteLinkInput.select();
+
+  navigator.clipboard.writeText(inviteLinkInput.value).then(function() {
+    alert("Invite link copied to clipboard!");
+  }).catch(function(error) {
+    console.error("Failed to copy text: ", error);
+  });
+});
 
 // Assignment List Listener
 assignmentList.addEventListener("click", (event) => {
