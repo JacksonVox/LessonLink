@@ -108,19 +108,21 @@
           <i class="close fa-regular fa-circle-xmark"></i>
         </div>
         <div class="break-thin"></div>
-        <input id="new-name"><%= student.userName %></input>
+        <input id="new-name" value="<%= student.userName %>"></input>
         <textarea name="" id="new-note"><%= student.note %></textarea>
         <div class="modal-lower-controls">
-          <div id="save-changes" class="btn-small-text">Open</div>
+          <div id="save-changes" class="btn-small-text">Save</div>
           <button type='button' id='delete-student' class='delete fas fa-trash-alt icon'></button>
         </div>
       </div>
     </div>
 
     
-    <div class="second-nav">
-      <button class="btn-2" id="openEditStudentModal">Edit</button>
-      <button class="btn-1" id="openInviteStudentModal">Invite</button>
+    <div class="bottom-nav">
+      <div>
+        <button class="btn-2" id="editStudentButton">Edit</button>
+        <button class="btn-1" id="inviteStudentButton">Invite</button>
+      </div>
       <a href="/students">Return to all Students</a>
     </div>
 
@@ -138,6 +140,14 @@
     </nav>  
   </footer>
 
+  <script>
+    const student = {
+      _id: "<%= student._id %>",
+      userName: "<%= student.userName %>",
+      note: "<%= student.note %>",
+    };
+    console.log("Student Object:", student);
+  </script>
   <script src="/js/viewStudent.js"></script>
 </body>
 

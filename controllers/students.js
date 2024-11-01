@@ -40,15 +40,17 @@ module.exports = {
   putEditStudent: async (req, res) => {
     try {
       const student = await Student.findById(req.body.studentId);
-      if (student.userName === req.body.studentName && student.note === req.body.studentNote){
-        res.redirect("/students/viewStudent/" + student._id)
-      } else if (req.body.studentName !== null){
-      student.userName = req.body.studentName;
-      student.note = req.body.studentNote;
-      student.save();
-      res.redirect("/students/viewStudent/" + student._id)
-      }} catch (err) {
+      if (student.userName === req.body.studentName && student.note === req.body.studentNote) {
+        res.redirect("/students/viewStudent/" + student._id);
+      } else if (req.body.studentName !== null) {
+        student.userName = req.body.studentName;
+        student.note = req.body.studentNote;
+        await student.save();
+        return res.status(200).json({ message: "Student information updated successfully." });
+      }
+    } catch (err) {
       console.log(err);
+      return res.status(500).json({ message: "Failed to update student information." });
     }
   },
   putAssignDocument: async (req, res) => {

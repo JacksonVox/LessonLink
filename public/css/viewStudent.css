@@ -86,7 +86,7 @@ main {
 }
 
 /* Second Nav */
-.second-nav {
+.bottom-nav {
   width: 100%;
   display: flex;
   flex-flow: row nowrap;
